@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './CardContainer.css';
+import moveDirection from './Constants';
 import Card from '../Card/Card';
 
 class CardContainer extends React.Component {
@@ -8,49 +9,51 @@ class CardContainer extends React.Component {
     super(props);
 
     this.state = {
-      displayedIndex: 0
+      current: 0
     };
   }
 
-  handleRightClick() {
-    const { displayedIndex } = this.state;
-    const newIndex = displayedIndex + 1;
-    this.setState({
-      displayedIndex: newIndex
-    });
-  }
+  handleArrowClick(direct) {
+    this.setState((state, props) => {
+      const { cardList } = props;
 
-  handleLeftClick() {
-    const { displayedIndex } = this.state;
-    const newIndex = displayedIndex - 1;
-    this.setState({
-      displayedIndex: newIndex
+      let newIndex = state.current + direct;
+      if (newIndex >= cardList.length) {
+        newIndex = 0;
+      }
+      if (newIndex < 0) {
+        newIndex = cardList.length - 1;
+      }
+
+      return {
+        current: newIndex
+      };
     });
   }
 
   render() {
-    const { title, cardList, maxCount } = this.props;
-    const { displayedIndex } = this.state;
+    const { title, cardList } = this.props;
+    const { current } = this.state;
 
-    let activeCount = 0;
-    const cardElements = cardList.map((card, index) => {
-      const active = index >= displayedIndex && activeCount < maxCount;
-      if (active) {
-        activeCount += 1;
-      }
-
-      return <Card posterUrl={card.url} title={card.title} active={active} />;
-    });
+    const cardElements = cardList.map((card) => (
+      <Card posterUrl={card.url} title={card.title} currentPosition={current} />
+    ));
 
     return (
       <div className="card-container">
         <h1>{title}</h1>
-        <h1>{displayedIndex}</h1>
-        <button type="button" onClick={() => this.handleLeftClick()}>
+        <h1>{current}</h1>
+        <button
+          type="button"
+          onClick={() => this.handleArrowClick(moveDirection.backward)}
+        >
           &lt;
         </button>
         <ul className="card-container__cards">{cardElements}</ul>
-        <button type="button" onClick={() => this.handleRightClick()}>
+        <button
+          type="button"
+          onClick={() => this.handleArrowClick(moveDirection.forward)}
+        >
           &gt;
         </button>
       </div>

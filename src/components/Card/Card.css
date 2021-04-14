@@ -1,13 +1,13 @@
 .card {
-  width: 300px;
+  min-width: 300px;
+  min-height: 150px;
   height: 150px;
   border-radius: 15px;
   margin: 10px;
-  visibility: hidden;
-}
 
-.card_isactive {
-  visibility: visible;
+  transition: transform 0.5s;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  will-change: transform;
 }
 
 .card .card__title {

@@ -13,11 +13,31 @@ const defaultCards = [
   },
   {
     title: 'StarWars'
+  },
+  {
+    title: 'Harry Potter',
+    url: 'img/harry-potter-poster.png'
+  },
+  {
+    title: 'Tenent',
+    url: 'img/tenent-poster.jpg'
+  },
+  {
+    title: 'StarWars'
+  },
+  {
+    title: 'Harry Potter',
+    url: 'img/harry-potter-poster.png'
+  },
+  {
+    title: 'Tenent',
+    url: 'img/tenent-poster.jpg'
+  },
+  {
+    title: 'StarWars'
   }
 ];
 
-const App = () => (
-  <CardContainer title="Films" cardList={defaultCards} maxCount="2" />
-);
+const App = () => <CardContainer title="Films" cardList={defaultCards} />;
 
 export default App;

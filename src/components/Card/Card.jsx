@@ -4,7 +4,7 @@ import './Card.css';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
 
 const Card = (props) => {
-  const { posterUrl, title, active } = props;
+  const { posterUrl, title, currentPosition } = props;
 
   const poster = posterUrl ? (
     <img className="card__poster" alt="" src={posterUrl} />
@@ -14,13 +14,13 @@ const Card = (props) => {
     </div>
   );
 
-  const classNames = ['card'];
-  if (active) {
-    classNames.push('card_isactive');
-  }
-
+  const offsetPersent = -currentPosition * 100;
+  const offsetPx = -currentPosition * 20;
+  const style = {
+    transform: `translateX(calc(${offsetPersent}% + ${offsetPx}px))`
+  };
   return (
-    <li className={classNames.join(' ')}>
+    <li className="card" style={style}>
       {poster}
       <p className="card__title">{title}</p>
     </li>
