@@ -16,6 +16,8 @@ const defaultCards = [
   }
 ];
 
-const App = () => <CardContainer title="Films" cardList={defaultCards} />;
+const App = () => (
+  <CardContainer title="Films" cardList={defaultCards} maxCount="2" />
+);
 
 export default App;

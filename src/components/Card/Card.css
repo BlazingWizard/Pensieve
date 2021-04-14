@@ -3,6 +3,11 @@
   height: 150px;
   border-radius: 15px;
   margin: 10px;
+  visibility: hidden;
+}
+
+.card_isactive {
+  visibility: visible;
 }
 
 .card .card__title {

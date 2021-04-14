@@ -4,7 +4,7 @@ import './Card.css';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
 
 const Card = (props) => {
-  const { posterUrl, title } = props;
+  const { posterUrl, title, active } = props;
 
   const poster = posterUrl ? (
     <img className="card__poster" alt="" src={posterUrl} />
@@ -14,8 +14,13 @@ const Card = (props) => {
     </div>
   );
 
+  const classNames = ['card'];
+  if (active) {
+    classNames.push('card_isactive');
+  }
+
   return (
-    <li className="card">
+    <li className={classNames.join(' ')}>
       {poster}
       <p className="card__title">{title}</p>
     </li>

@@ -3,19 +3,59 @@ import React from 'react';
 import './CardContainer.css';
 import Card from '../Card/Card';
 
-const CardContainer = (props) => {
-  const { title, cardList } = props;
+class CardContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const cardElements = cardList.map((card) => (
-    <Card posterUrl={card.url} title={card.title} />
-  ));
+    this.state = {
+      displayedIndex: 0
+    };
+  }
 
-  return (
-    <div className="card-container">
-      <h1>{title}</h1>
-      <ul className="card-container__cards">{cardElements}</ul>
-    </div>
-  );
-};
+  handleRightClick() {
+    const { displayedIndex } = this.state;
+    const newIndex = displayedIndex + 1;
+    this.setState({
+      displayedIndex: newIndex
+    });
+  }
+
+  handleLeftClick() {
+    const { displayedIndex } = this.state;
+    const newIndex = displayedIndex - 1;
+    this.setState({
+      displayedIndex: newIndex
+    });
+  }
+
+  render() {
+    const { title, cardList, maxCount } = this.props;
+    const { displayedIndex } = this.state;
+
+    let activeCount = 0;
+    const cardElements = cardList.map((card, index) => {
+      const active = index >= displayedIndex && activeCount < maxCount;
+      if (active) {
+        activeCount += 1;
+      }
+
+      return <Card posterUrl={card.url} title={card.title} active={active} />;
+    });
+
+    return (
+      <div className="card-container">
+        <h1>{title}</h1>
+        <h1>{displayedIndex}</h1>
+        <button type="button" onClick={() => this.handleLeftClick()}>
+          &lt;
+        </button>
+        <ul className="card-container__cards">{cardElements}</ul>
+        <button type="button" onClick={() => this.handleRightClick()}>
+          &gt;
+        </button>
+      </div>
+    );
+  }
+}
 
 export default CardContainer;
