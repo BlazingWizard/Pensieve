@@ -4,7 +4,7 @@ import './Card.css';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
 
 const Card = (props) => {
-  const { posterUrl, title, currentPosition } = props;
+  const { posterUrl, title } = props;
 
   const poster = posterUrl ? (
     <img className="card__poster" alt="" src={posterUrl} />
@@ -14,13 +14,8 @@ const Card = (props) => {
     </div>
   );
 
-  const offsetPersent = -currentPosition * 100;
-  const offsetPx = -currentPosition * 20;
-  const style = {
-    transform: `translateX(calc(${offsetPersent}% + ${offsetPx}px))`
-  };
   return (
-    <li className="card" style={style}>
+    <li className="card">
       {poster}
       <p className="card__title">{title}</p>
     </li>

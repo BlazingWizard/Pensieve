@@ -1,59 +1,60 @@
 import React from 'react';
 
 import './CardContainer.css';
-import moveDirection from './Constants';
 import Card from '../Card/Card';
 
 class CardContainer extends React.Component {
   constructor(props) {
     super(props);
-
+    this.content = React.createRef();
     this.state = {
-      current: 0
+      currentLeftOffset: 0
     };
   }
 
-  handleArrowClick(direct) {
-    this.setState((state, props) => {
-      const { cardList } = props;
+  componentDidUpdate() {
+    const { currentLeftOffset } = this.state;
+    this.content.current.scrollLeft = currentLeftOffset;
+  }
 
-      let newIndex = state.current + direct;
-      if (newIndex >= cardList.length) {
-        newIndex = 0;
-      }
-      if (newIndex < 0) {
-        newIndex = cardList.length - 1;
-      }
+  handleBackwardClick() {
+    this.setState({ currentLeftOffset: 0 });
+  }
 
-      return {
-        current: newIndex
-      };
+  handleForwardClick() {
+    const maxOffset = this.content.current.scrollWidth;
+    this.setState({ currentLeftOffset: maxOffset });
+  }
+
+  handleScroll(e) {
+    this.setState({
+      currentLeftOffset: e.target.scrollLeft
     });
   }
 
   render() {
     const { title, cardList } = this.props;
-    const { current } = this.state;
+    const { currentLeftOffset } = this.state;
 
     const cardElements = cardList.map((card) => (
-      <Card posterUrl={card.url} title={card.title} currentPosition={current} />
+      <Card posterUrl={card.url} title={card.title} />
     ));
 
     return (
       <div className="card-container">
         <h1>{title}</h1>
-        <h1>{current}</h1>
-        <button
-          type="button"
-          onClick={() => this.handleArrowClick(moveDirection.backward)}
-        >
+        <h1>{currentLeftOffset}</h1>
+        <button type="button" onClick={() => this.handleBackwardClick()}>
           &lt;
         </button>
-        <ul className="card-container__cards">{cardElements}</ul>
-        <button
-          type="button"
-          onClick={() => this.handleArrowClick(moveDirection.forward)}
+        <ul
+          className="card-container__cards"
+          onScroll={(e) => this.handleScroll(e)}
+          ref={this.content}
         >
+          {cardElements}
+        </ul>
+        <button type="button" onClick={() => this.handleForwardClick()}>
           &gt;
         </button>
       </div>
