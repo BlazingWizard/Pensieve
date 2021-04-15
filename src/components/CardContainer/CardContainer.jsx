@@ -42,7 +42,7 @@ class CardContainer extends React.Component {
     const { isExpand } = this.state;
 
     const cardElements = cardList.map((card) => (
-      <Card posterUrl={card.url} title={card.title} />
+      <Card key={card.id} posterUrl={card.url} title={card.title} />
     ));
 
     const isExpandClass = isExpand ? 'card-container__cards_isexpand' : '';
@@ -54,19 +54,21 @@ class CardContainer extends React.Component {
         <button type="button" onClick={() => this.handleToggleExpandClick()}>
           {expandButtonText}
         </button>
-        <button type="button" onClick={() => this.handleBackwardClick()}>
-          &lt;
-        </button>
-        <ul
-          className={`card-container__cards ${isExpandClass}`}
-          onScroll={(e) => this.handleScroll(e)}
-          ref={this.content}
-        >
-          {cardElements}
-        </ul>
-        <button type="button" onClick={() => this.handleForwardClick()}>
-          &gt;
-        </button>
+        <div>
+          <button type="button" onClick={() => this.handleBackwardClick()}>
+            &lt;
+          </button>
+          <ul
+            className={`card-container__cards ${isExpandClass}`}
+            onScroll={(e) => this.handleScroll(e)}
+            ref={this.content}
+          >
+            {cardElements}
+          </ul>
+          <button type="button" onClick={() => this.handleForwardClick()}>
+            &gt;
+          </button>
+        </div>
       </div>
     );
   }
