@@ -8,13 +8,18 @@ class CardContainer extends React.Component {
     super(props);
     this.content = React.createRef();
     this.state = {
-      currentLeftOffset: 0
+      currentLeftOffset: 0,
+      isExpand: false
     };
   }
 
   componentDidUpdate() {
     const { currentLeftOffset } = this.state;
     this.content.current.scrollLeft = currentLeftOffset;
+  }
+
+  handleToggleExpandClick() {
+    this.setState((state) => ({ isExpand: !state.isExpand }));
   }
 
   handleBackwardClick() {
@@ -34,21 +39,26 @@ class CardContainer extends React.Component {
 
   render() {
     const { title, cardList } = this.props;
-    const { currentLeftOffset } = this.state;
+    const { isExpand } = this.state;
 
     const cardElements = cardList.map((card) => (
       <Card posterUrl={card.url} title={card.title} />
     ));
 
+    const isExpandClass = isExpand ? 'card-container__cards_isexpand' : '';
+    const expandButtonText = isExpand ? '-' : '+';
+
     return (
       <div className="card-container">
         <h1>{title}</h1>
-        <h1>{currentLeftOffset}</h1>
+        <button type="button" onClick={() => this.handleToggleExpandClick()}>
+          {expandButtonText}
+        </button>
         <button type="button" onClick={() => this.handleBackwardClick()}>
           &lt;
         </button>
         <ul
-          className="card-container__cards"
+          className={`card-container__cards ${isExpandClass}`}
           onScroll={(e) => this.handleScroll(e)}
           ref={this.content}
         >
