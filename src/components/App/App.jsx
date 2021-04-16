@@ -1,52 +1,36 @@
 import React from 'react';
 
+import cardTypes from './cardTypes';
+import staticCards from './staticCards';
+
 import CardContainer from '../CardContainer';
 
-const defaultCards = [
-  {
-    id: 1,
-    title: 'Harry Potter',
-    url: 'img/harry-potter-poster.png'
-  },
-  {
-    id: 2,
-    title: 'Tenent',
-    url: 'img/tenent-poster.jpg'
-  },
-  {
-    id: 3,
-    title: 'StarWars'
-  },
-  {
-    id: 4,
-    title: 'Harry Potter',
-    url: 'img/harry-potter-poster.png'
-  },
-  {
-    id: 5,
-    title: 'Tenent',
-    url: 'img/tenent-poster.jpg'
-  },
-  {
-    id: 6,
-    title: 'StarWars'
-  },
-  {
-    id: 7,
-    title: 'Harry Potter',
-    url: 'img/harry-potter-poster.png'
-  },
-  {
-    id: 8,
-    title: 'Tenent',
-    url: 'img/tenent-poster.jpg'
-  },
-  {
-    id: 9,
-    title: 'StarWars'
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: staticCards
+    };
   }
-];
 
-const App = () => <CardContainer title="Films" cardList={defaultCards} />;
-
+  render() {
+    const { cards } = this.state;
+    return (
+      <>
+        <CardContainer
+          title="Films"
+          cardList={cards.filter((e) => e.type === cardTypes.film)}
+        />
+        <CardContainer
+          title="TV Shows"
+          cardList={cards.filter((e) => e.type === cardTypes.tvshow)}
+        />
+        <CardContainer
+          title="Games"
+          cardList={cards.filter((e) => e.type === cardTypes.game)}
+        />
+      </>
+    );
+  }
+}
 export default App;
