@@ -6,7 +6,7 @@ import Card from '../Card/Card';
 class CardContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.content = React.createRef();
+    this.cardList = React.createRef();
     this.state = {
       currentLeftOffset: 0,
       isExpand: false
@@ -15,7 +15,7 @@ class CardContainer extends React.Component {
 
   componentDidUpdate() {
     const { currentLeftOffset } = this.state;
-    this.content.current.scrollLeft = currentLeftOffset;
+    this.cardList.current.scrollLeft = currentLeftOffset;
   }
 
   handleToggleExpandClick() {
@@ -27,7 +27,7 @@ class CardContainer extends React.Component {
   }
 
   handleForwardClick() {
-    const maxOffset = this.content.current.scrollWidth;
+    const maxOffset = this.cardList.current.scrollWidth;
     this.setState({ currentLeftOffset: maxOffset });
   }
 
@@ -38,11 +38,16 @@ class CardContainer extends React.Component {
   }
 
   render() {
-    const { title, cardList } = this.props;
+    const { title, cardList, onCardDeleteClick } = this.props;
     const { isExpand } = this.state;
 
     const cardElements = cardList.map((card) => (
-      <Card key={card.id} posterUrl={card.url} title={card.title} />
+      <Card
+        key={card.id}
+        posterUrl={card.url}
+        title={card.title}
+        onCardDeleteClick={() => onCardDeleteClick(card.id)}
+      />
     ));
 
     const isExpandClass = isExpand ? 'card-container__cards_isexpand' : '';
@@ -61,7 +66,7 @@ class CardContainer extends React.Component {
           <ul
             className={`card-container__cards ${isExpandClass}`}
             onScroll={(e) => this.handleScroll(e)}
-            ref={this.content}
+            ref={this.cardList}
           >
             {cardElements}
           </ul>
