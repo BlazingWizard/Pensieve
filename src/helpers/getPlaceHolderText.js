@@ -1,5 +1,6 @@
 function getPlaceHolderText(text) {
   const defaultPlaceholder = text
+    .replace(/\W/g, '')
     .split('')
     .filter((s) => s === s.toUpperCase())
     .join('');
