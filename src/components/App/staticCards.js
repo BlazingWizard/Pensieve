@@ -1,4 +1,4 @@
-import cardTypes from './cardTypes';
+import cardTypes from './cardContainerList';
 
 const staticCards = [
   {

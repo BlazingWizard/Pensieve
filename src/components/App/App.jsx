@@ -1,6 +1,6 @@
 import React from 'react';
 
-import cardTypes from './cardTypes';
+import { cardContainerList } from './cardContainerList';
 import staticCards from './staticCards';
 
 import CardContainer from '../CardContainer';
@@ -26,25 +26,17 @@ class App extends React.Component {
 
   render() {
     const { cards } = this.state;
-    return (
-      <>
-        <CardContainer
-          title="Films"
-          cardList={cards.filter((e) => e.type === cardTypes.film)}
-          onCardDeleteClick={this.onCardDeleteClick}
-        />
-        <CardContainer
-          title="TV Shows"
-          cardList={cards.filter((e) => e.type === cardTypes.tvshow)}
-          onCardDeleteClick={this.onCardDeleteClick}
-        />
-        <CardContainer
-          title="Games"
-          cardList={cards.filter((e) => e.type === cardTypes.game)}
-          onCardDeleteClick={this.onCardDeleteClick}
-        />
-      </>
-    );
+
+    const content = cardContainerList.map((cardContainer) => (
+      <CardContainer
+        key={cardContainer.type}
+        title={cardContainer.title}
+        cardList={cards.filter((e) => e.type === cardContainer.type)}
+        onCardDeleteClick={this.onCardDeleteClick}
+      />
+    ));
+
+    return <>{content}</>;
   }
 }
 export default App;
