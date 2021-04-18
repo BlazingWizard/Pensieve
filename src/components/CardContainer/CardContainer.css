@@ -1,4 +1,35 @@
 .card-container {
+  border: 1px solid white;
+  margin-bottom: 5px;
+  padding-left: 10px;
+}
+
+.card-container__root {
+  position: relative;
+}
+
+.card-container__root .card-container__backward-button {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+}
+.card-container__root .card-container__forward-button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+}
+
+.card-container__nav-button {
+  height: 100%;
+  background: none;
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+  font-size: 50px;
+  color: white;
 }
 
 .card-container__cards {

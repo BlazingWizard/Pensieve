@@ -73,16 +73,24 @@ class CardContainer extends React.Component {
     const expandButtonText = isExpand ? '-' : '+';
 
     return (
-      <div className="card-container">
+      <div className="card-container header">
         <h1>{title}</h1>
         {(scrollIsVisible || isExpand) && (
-          <button type="button" onClick={() => this.handleToggleExpandClick()}>
+          <button
+            type="button"
+            className="card-container__expand-button"
+            onClick={() => this.handleToggleExpandClick()}
+          >
             {expandButtonText}
           </button>
         )}
-        <div>
+        <div className="card-container__root">
           {scrollIsVisible && (
-            <button type="button" onClick={() => this.handleBackwardClick()}>
+            <button
+              type="button"
+              className="card-container__nav-button card-container__backward-button"
+              onClick={() => this.handleBackwardClick()}
+            >
               &lt;
             </button>
           )}
@@ -94,7 +102,11 @@ class CardContainer extends React.Component {
             {cardElements}
           </ul>
           {scrollIsVisible && (
-            <button type="button" onClick={() => this.handleForwardClick()}>
+            <button
+              type="button"
+              className="card-container__nav-button card-container__forward-button"
+              onClick={() => this.handleForwardClick()}
+            >
               &gt;
             </button>
           )}

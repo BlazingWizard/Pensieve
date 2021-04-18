@@ -1,0 +1,10 @@
+body {
+  background-color: #141414;
+  margin: 5px;
+}
+
+.header,
+.text {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
