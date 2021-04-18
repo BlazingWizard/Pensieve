@@ -3,6 +3,7 @@ import React from 'react';
 import { cardContainerList } from './cardContainerList';
 import staticCards from './staticCards';
 
+import CardForm from '../CardForm';
 import CardContainer from '../CardContainer';
 import Popup from '../../elements/Popup';
 
@@ -26,6 +27,26 @@ class Reviews extends React.Component {
   handleClosePopupClick() {
     this.setState({
       createPopupVisible: false
+    });
+  }
+
+  onCardAddClick(card) {
+    this.setState((state) => {
+      const { cards } = state;
+      const id =
+        cards.reduce(
+          (max, curr) => (max < curr.id ? curr.id : max),
+          cards[0].id
+        ) + 1;
+      return {
+        cards: [
+          {
+            id,
+            ...card
+          },
+          ...cards
+        ]
+      };
     });
   }
 
@@ -64,7 +85,11 @@ class Reviews extends React.Component {
           isVisible={createPopupVisible}
           handleCloseClick={() => this.handleClosePopupClick()}
         >
-          <h1>message</h1>
+          <CardForm
+            cardTypes={cardContainerList}
+            onCardAddClick={(card) => this.onCardAddClick(card)}
+            handleCloseClick={() => this.handleClosePopupClick()}
+          />
         </Popup>
       </div>
     );
