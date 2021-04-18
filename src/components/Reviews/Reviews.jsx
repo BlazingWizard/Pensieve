@@ -4,15 +4,29 @@ import { cardContainerList } from './cardContainerList';
 import staticCards from './staticCards';
 
 import CardContainer from '../CardContainer';
+import Popup from '../../elements/Popup';
 
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: staticCards
+      cards: staticCards,
+      createPopupVisible: false
     };
 
     this.onCardDeleteClick = this.onCardDeleteClick.bind(this);
+  }
+
+  handleCreatePopupClick() {
+    this.setState({
+      createPopupVisible: true
+    });
+  }
+
+  handleClosePopupClick() {
+    this.setState({
+      createPopupVisible: false
+    });
   }
 
   onCardDeleteClick(id) {
@@ -25,7 +39,7 @@ class Reviews extends React.Component {
   }
 
   render() {
-    const { cards } = this.state;
+    const { cards, createPopupVisible } = this.state;
 
     const content = cardContainerList.map((cardContainer) => (
       <CardContainer
@@ -39,9 +53,19 @@ class Reviews extends React.Component {
     return (
       <div>
         {content}
-        <button type="button" className="">
+        <button
+          type="button"
+          className=""
+          onClick={() => this.handleCreatePopupClick()}
+        >
           +
         </button>
+        <Popup
+          isVisible={createPopupVisible}
+          handleCloseClick={() => this.handleClosePopupClick()}
+        >
+          <h1>message</h1>
+        </Popup>
       </div>
     );
   }
