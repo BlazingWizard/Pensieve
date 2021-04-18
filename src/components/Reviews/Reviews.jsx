@@ -5,7 +5,7 @@ import staticCards from './staticCards';
 
 import CardContainer from '../CardContainer';
 
-class App extends React.Component {
+class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,14 @@ class App extends React.Component {
       />
     ));
 
-    return <>{content}</>;
+    return (
+      <div>
+        {content}
+        <button type="button" className="">
+          +
+        </button>
+      </div>
+    );
   }
 }
-export default App;
+export default Reviews;
