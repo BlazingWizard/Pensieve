@@ -9,13 +9,20 @@ class CardContainer extends React.Component {
     this.cardList = React.createRef();
     this.state = {
       currentLeftOffset: 0,
+      scrollIsVisible: false,
       isExpand: false
     };
+  }
+
+  componentDidMount() {
+    this.updateScrollIsVisibleState();
   }
 
   componentDidUpdate() {
     const { currentLeftOffset } = this.state;
     this.cardList.current.scrollLeft = currentLeftOffset;
+
+    this.updateScrollIsVisibleState();
   }
 
   handleToggleExpandClick() {
@@ -37,9 +44,21 @@ class CardContainer extends React.Component {
     });
   }
 
+  updateScrollIsVisibleState() {
+    const { current } = this.cardList;
+
+    this.setState((state) => {
+      const scrollIsVisible = current.clientWidth !== current.scrollWidth;
+      if (state.scrollIsVisible !== scrollIsVisible) {
+        return { scrollIsVisible };
+      }
+      return null;
+    });
+  }
+
   render() {
     const { title, cardList, onCardDeleteClick } = this.props;
-    const { isExpand } = this.state;
+    const { scrollIsVisible, isExpand } = this.state;
 
     const cardElements = cardList.map((card) => (
       <Card
@@ -56,13 +75,17 @@ class CardContainer extends React.Component {
     return (
       <div className="card-container">
         <h1>{title}</h1>
-        <button type="button" onClick={() => this.handleToggleExpandClick()}>
-          {expandButtonText}
-        </button>
-        <div>
-          <button type="button" onClick={() => this.handleBackwardClick()}>
-            &lt;
+        {(scrollIsVisible || isExpand) && (
+          <button type="button" onClick={() => this.handleToggleExpandClick()}>
+            {expandButtonText}
           </button>
+        )}
+        <div>
+          {scrollIsVisible && (
+            <button type="button" onClick={() => this.handleBackwardClick()}>
+              &lt;
+            </button>
+          )}
           <ul
             className={`card-container__cards ${isExpandClass}`}
             onScroll={(e) => this.handleScroll(e)}
@@ -70,9 +93,11 @@ class CardContainer extends React.Component {
           >
             {cardElements}
           </ul>
-          <button type="button" onClick={() => this.handleForwardClick()}>
-            &gt;
-          </button>
+          {scrollIsVisible && (
+            <button type="button" onClick={() => this.handleForwardClick()}>
+              &gt;
+            </button>
+          )}
         </div>
       </div>
     );
