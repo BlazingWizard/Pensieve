@@ -73,12 +73,12 @@ class CardContainer extends React.Component {
     const expandButtonText = isExpand ? '-' : '+';
 
     return (
-      <div className="card-container header">
-        <h1>{title}</h1>
+      <div className="card-container">
+        <h1 className="card-container__header header">{title}</h1>
         {(scrollIsVisible || isExpand) && (
           <button
             type="button"
-            className="card-container__expand-button"
+            className="card-container__expand-button text"
             onClick={() => this.handleToggleExpandClick()}
           >
             {expandButtonText}

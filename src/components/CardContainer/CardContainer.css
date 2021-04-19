@@ -1,5 +1,5 @@
 .card-container {
-  border: 1px solid white;
+  border-bottom: 1px solid #363636;
   margin-bottom: 5px;
   padding-left: 10px;
 }
@@ -32,6 +32,16 @@
   color: white;
 }
 
+.card-container__expand-button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.card-container__header {
+  display: inline-block;
+}
+
 .card-container__cards {
   display: flex;
   list-style: none;
@@ -43,7 +53,7 @@
 }
 
 .card-container__cards::-webkit-scrollbar {
-  width: 1em;
+  height: 5px;
 }
 
 .card-container__cards::-webkit-scrollbar-track {
@@ -51,6 +61,5 @@
 }
 
 .card-container__cards::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
+  background-color: #363636;
 }

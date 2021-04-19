@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './Reviews.css';
 import { cardContainerList } from './cardContainerList';
 import staticCards from './staticCards';
 
@@ -72,11 +73,11 @@ class Reviews extends React.Component {
     ));
 
     return (
-      <div>
+      <div className="reviews">
         {content}
         <button
           type="button"
-          className=""
+          className="reviews__create-button"
           onClick={() => this.handleCreatePopupClick()}
         >
           +
