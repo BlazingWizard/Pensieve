@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pensive.Data\Pensive.Data.csproj" />
+  </ItemGroup>
+
 </Project>

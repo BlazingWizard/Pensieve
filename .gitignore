@@ -127,3 +127,6 @@ FakesAssemblies/
 
 # Local History for Visual Studio
 .localhistory/
+
+Migrations/
+*.db
