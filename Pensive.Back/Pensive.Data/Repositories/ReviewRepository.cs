@@ -17,12 +17,16 @@ namespace Pensive.Data.Repositories
 
         public async Task<Review> GetByIdAsync(int id)
         {
-            return await _context.Reviews.FirstOrDefaultAsync(r => r.Id == id);
+            return await _context.Reviews
+                .Include(review => review.Type)
+                .FirstOrDefaultAsync(review => review.Id == id);
         }
 
         public async Task<List<Review>> GetAllAsync()
         {
-            return await _context.Reviews.ToListAsync();
+            return await _context.Reviews
+                .Include(review => review.Type)
+                .ToListAsync();
         }
 
         public async Task CreateAsync(Review review)

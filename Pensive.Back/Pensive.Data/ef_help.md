@@ -15,5 +15,5 @@ dotnet ef migrations add Initial --project Pensive.Data/ --startup-project Pensi
 # Update data base
 
 ```bash
-dotnet ef database update --project Pds.Data --startup-project Pds.Api
+dotnet ef database update --project Pensive.Data --startup-project Pensive.API
 ```

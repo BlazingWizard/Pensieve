@@ -7,7 +7,7 @@ namespace Pensive.Services.Mappings
     {
         public static ReviewModel ToReviewModel(this Review review)
         {
-            return new ReviewModel()
+            return new()
             {
                 Id = review.Id,
                 Title = review.Title,

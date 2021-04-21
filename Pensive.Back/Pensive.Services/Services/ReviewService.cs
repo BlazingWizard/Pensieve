@@ -20,7 +20,7 @@ namespace Pensive.Services.Services
         public async Task<ReviewModel> GetAsync(int id)
         {
             var review = await _reviewRepository.GetByIdAsync(id);
-            return review.ToReviewModel();
+            return review?.ToReviewModel();
         }
 
         public async Task<List<ReviewModel>> GetAllAsync()
