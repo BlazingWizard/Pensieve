@@ -32,6 +32,19 @@ namespace Pensive.Data.Repositories
         public async Task CreateAsync(Review review)
         {
             await _context.Reviews.AddAsync(review);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Review review)
+        {
+            _context.Reviews.Remove(review);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Review reviewModel)
+        {
+            _context.Reviews.Update(reviewModel);
+            await _context.SaveChangesAsync();
         }
     }
 }

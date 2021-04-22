@@ -14,5 +14,15 @@ namespace Pensive.Services.Mappings
                 ReviewType = review.Type.Name
             };
         }
+
+        public static Review ToReviewEntity(this ReviewModel reviewModel, ReviewType reviewType = null)
+        {
+            return new()
+            {
+                Id = reviewModel.Id,
+                Title = reviewModel.Title,
+                Type = reviewType
+            };
+        }
     }
 }

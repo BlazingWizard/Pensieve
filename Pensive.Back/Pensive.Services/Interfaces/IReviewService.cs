@@ -9,5 +9,11 @@ namespace Pensive.Services.Interfaces
         Task<ReviewModel> GetAsync(int id);
 
         Task<List<ReviewModel>> GetAllAsync();
+        
+        Task CreateAsync(ReviewModel reviewModel);
+
+        Task UpdateAsync(ReviewModel reviewModel);
+
+        Task DeleteAsync(int id);
     }
 }
