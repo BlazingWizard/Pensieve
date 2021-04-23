@@ -25,6 +25,18 @@ namespace Pensive.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+            
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
@@ -47,6 +59,7 @@ namespace Pensive.API
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
