@@ -4,6 +4,7 @@ using Pensive.Services.Interfaces;
 
 namespace Pensive.API.Controllers
 {
+    [ApiController]
     [Route("api/reviews/types")]
     public class ReviewTypeController : Controller
     {

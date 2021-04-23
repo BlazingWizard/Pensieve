@@ -36,13 +36,13 @@ namespace Pensive.Services.Services
 
         public async Task CreateAsync(ReviewModel reviewModel)
         {
-            var reviewType = await GetReviewTypeByCode(reviewModel.ReviewType);
+            var reviewType = await GetReviewTypeByCode(reviewModel.Type);
             await _reviewRepository.CreateAsync(reviewModel.ToReviewEntity(reviewType));
         }
 
         public async Task UpdateAsync(ReviewModel reviewModel)
         {
-            var reviewType = await GetReviewTypeByCode(reviewModel.ReviewType);
+            var reviewType = await GetReviewTypeByCode(reviewModel.Type);
             await _reviewRepository.UpdateAsync(reviewModel.ToReviewEntity(reviewType));
         }
 

@@ -8,6 +8,7 @@ using Pensive.Services.Models;
 
 namespace Pensive.API.Controllers
 {
+    [ApiController]
     [Route("api/reviews")]
     public class ReviewController : Controller
     {

@@ -5,5 +5,6 @@ namespace Pensive.Data.Entities
         public int Id { get; set; }
         public ReviewType Type { get; set; }
         public string Title { get; set; }
+        public string PosterUrl { get; set; }
     }
 }
