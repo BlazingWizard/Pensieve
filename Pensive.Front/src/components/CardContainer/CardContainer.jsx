@@ -63,7 +63,7 @@ class CardContainer extends React.Component {
     const cardElements = cardList.map((card) => (
       <Card
         key={card.id}
-        posterUrl={card.url}
+        posterUrl={card.posterUrl}
         title={card.title}
         onCardDeleteClick={() => onCardDeleteClick(card.id)}
       />

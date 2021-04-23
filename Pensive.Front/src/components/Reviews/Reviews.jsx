@@ -1,8 +1,8 @@
 import React from 'react';
 
 import './Reviews.css';
+import { getAll } from '../../API/reviewApi';
 import { cardContainerList } from './cardContainerList';
-import staticCards from './staticCards';
 
 import CardForm from '../CardForm';
 import CardContainer from '../CardContainer';
@@ -12,11 +12,19 @@ class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: staticCards,
+      cards: [],
       createPopupVisible: false
     };
 
     this.onCardDeleteClick = this.onCardDeleteClick.bind(this);
+  }
+
+  componentDidMount() {
+    getAll().then((response) => {
+      this.setState({
+        cards: response
+      });
+    });
   }
 
   handleCreatePopupClick() {
@@ -62,7 +70,6 @@ class Reviews extends React.Component {
 
   render() {
     const { cards, createPopupVisible } = this.state;
-
     const content = cardContainerList.map((cardContainer) => (
       <CardContainer
         key={cardContainer.type}
