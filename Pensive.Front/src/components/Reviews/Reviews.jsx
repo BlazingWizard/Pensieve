@@ -67,11 +67,13 @@ class Reviews extends React.Component {
   }
 
   onCardDeleteClick(id) {
-    this.setState((state) => {
-      const { cards } = state;
-      return {
-        cards: cards.filter((c) => c.id !== id)
-      };
+    reviewApi.del(id).then(() => {
+      this.setState((state) => {
+        const { cards } = state;
+        return {
+          cards: cards.filter((c) => c.id !== id)
+        };
+      });
     });
   }
 

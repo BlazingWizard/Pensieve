@@ -17,7 +17,14 @@ function createApi(apiTypeUrl) {
       throw Error('Something went wrong');
     }
 
-    return response.json();
+    const responseText = await response.text();
+
+    return new Promise((resolve) => {
+      const convertedResponse = responseText
+        ? JSON.parse(responseText)
+        : responseText;
+      resolve(convertedResponse);
+    });
   };
 
   return {
