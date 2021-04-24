@@ -1,6 +1,14 @@
-function createApi(apiHostUrl) {
+import combineUrl from '../helpers/combineUrl';
+
+function createApi(apiTypeUrl) {
   const request = async (method, url, body = null) => {
-    const response = await fetch(`${apiHostUrl}/${url}`, {
+    const apiBaseUrl = process.env.REACT_APP_API_BASE;
+    if (!apiBaseUrl) {
+      throw Error('Environment param "REACT_APP_API_BASE" not found.');
+    }
+
+    const urlParts = [apiBaseUrl, apiTypeUrl, url];
+    const response = await fetch(combineUrl(urlParts), {
       method,
       body
     });

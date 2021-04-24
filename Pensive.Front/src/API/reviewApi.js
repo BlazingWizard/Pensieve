@@ -1,6 +1,6 @@
 import createApi from './createApi';
 
-const reviewApi = createApi('https://localhost:5001/api/reviews');
+const reviewApi = createApi('reviews');
 
 function getAll() {
   return reviewApi.get('');
@@ -22,4 +22,4 @@ function update(review) {
   return reviewApi.put(review.id, review);
 }
 
-export { get, getAll, del, create, update };
+export default { get, getAll, del, create, update };
