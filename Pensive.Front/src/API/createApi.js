@@ -6,11 +6,14 @@ function createApi(apiTypeUrl) {
     if (!apiBaseUrl) {
       throw Error('Environment param "REACT_APP_API_BASE" not found.');
     }
-
+    const payload = body ? JSON.stringify(body) : null;
     const urlParts = [apiBaseUrl, apiTypeUrl, url];
     const response = await fetch(combineUrl(urlParts), {
       method,
-      body
+      body: payload,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
 
     if (!response.ok) {

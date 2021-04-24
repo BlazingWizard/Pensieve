@@ -29,10 +29,11 @@ namespace Pensive.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task CreateAsync(Review review)
+        public async Task<Review> CreateAsync(Review review)
         {
             await _context.Reviews.AddAsync(review);
             await _context.SaveChangesAsync();
+            return review;
         }
 
         public async Task DeleteAsync(Review review)
@@ -41,9 +42,9 @@ namespace Pensive.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Review reviewModel)
+        public async Task UpdateAsync(Review review)
         {
-            _context.Reviews.Update(reviewModel);
+            _context.Reviews.Update(review);
             await _context.SaveChangesAsync();
         }
     }

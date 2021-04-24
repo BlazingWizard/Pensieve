@@ -7,7 +7,7 @@ class CardForm extends React.Component {
     const { cardTypes } = this.props;
     this.state = {
       title: '',
-      type: cardTypes[0].type,
+      type: cardTypes[0].code,
       reviewText: '',
       mark: 0
     };
@@ -50,7 +50,7 @@ class CardForm extends React.Component {
           Type:
           <select name="type" value={type} onChange={this.handleInputChange}>
             {cardTypes.map((cardType) => (
-              <option key={cardType.type} value={cardType.type}>
+              <option key={cardType.code} value={cardType.code}>
                 {cardType.name}
               </option>
             ))}

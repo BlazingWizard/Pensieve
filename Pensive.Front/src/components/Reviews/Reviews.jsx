@@ -47,22 +47,13 @@ class Reviews extends React.Component {
   }
 
   onCardAddClick(card) {
-    this.setState((state) => {
-      const { cards } = state;
-      const id =
-        cards.reduce(
-          (max, curr) => (max < curr.id ? curr.id : max),
-          cards[0].id
-        ) + 1;
-      return {
-        cards: [
-          {
-            id,
-            ...card
-          },
-          ...cards
-        ]
-      };
+    reviewApi.create(card).then((response) => {
+      this.setState((state) => {
+        const { cards } = state;
+        return {
+          cards: [response, ...cards]
+        };
+      });
     });
   }
 

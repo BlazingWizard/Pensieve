@@ -20,16 +20,16 @@ namespace Pensive.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm]ReviewModel reviewModel)
+        public async Task<IActionResult> Create([FromBody]ReviewModel reviewModel)
         {
             try
             {
-                await _reviewService.CreateAsync(reviewModel);
-                return Ok();
+                var review = await _reviewService.CreateAsync(reviewModel);
+                return Ok(review);
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message); 
+              return BadRequest(e.Message); 
             }
             
         }

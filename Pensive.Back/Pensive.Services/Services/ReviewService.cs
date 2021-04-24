@@ -34,10 +34,11 @@ namespace Pensive.Services.Services
             return reviewList.Select(r => r.ToReviewModel()).ToList();
         }
 
-        public async Task CreateAsync(ReviewModel reviewModel)
+        public async Task<ReviewModel> CreateAsync(ReviewModel reviewModel)
         {
             var reviewType = await GetReviewTypeByCode(reviewModel.Type);
-            await _reviewRepository.CreateAsync(reviewModel.ToReviewEntity(reviewType));
+            var review = await _reviewRepository.CreateAsync(reviewModel.ToReviewEntity(reviewType));
+            return review.ToReviewModel();
         }
 
         public async Task UpdateAsync(ReviewModel reviewModel)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Pensive.Data.Entities;
 using Pensive.Services.Models;
 
 namespace Pensive.Services.Interfaces
@@ -10,7 +11,7 @@ namespace Pensive.Services.Interfaces
 
         Task<List<ReviewModel>> GetAllAsync();
         
-        Task CreateAsync(ReviewModel reviewModel);
+        Task<ReviewModel> CreateAsync(ReviewModel reviewModel);
 
         Task UpdateAsync(ReviewModel reviewModel);
 
