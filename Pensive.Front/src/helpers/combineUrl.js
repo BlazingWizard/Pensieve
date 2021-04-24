@@ -1,11 +1,9 @@
 function combineUrl(parts) {
-  const partsWithSlash = parts.map((part) => {
-    if (typeof part !== 'string') {
-      throw Error('Wrong type');
-    }
-
-    return part.trim().replaceAll(/(^\/|\/$)/g, '');
-  });
+  const partsWithSlash = parts.map((part) =>
+    String(part)
+      .trim()
+      .replaceAll(/(^\/|\/$)/g, '')
+  );
 
   return partsWithSlash.join('/');
 }
