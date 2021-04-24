@@ -1,8 +1,8 @@
 import React from 'react';
 
 import './Reviews.css';
-import { getAll } from '../../API/reviewApi';
-import { cardContainerList } from './cardContainerList';
+import reviewApi from '../../API/reviewApi';
+import reviewTypeApi from '../../API/reviewTypeApi';
 
 import CardForm from '../CardForm';
 import CardContainer from '../CardContainer';
@@ -13,6 +13,7 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       cards: [],
+      cardContainerList: [],
       createPopupVisible: false
     };
 
@@ -20,9 +21,15 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    getAll().then((response) => {
+    reviewApi.getAll().then((response) => {
       this.setState({
         cards: response
+      });
+    });
+
+    reviewTypeApi.getAll().then((response) => {
+      this.setState({
+        cardContainerList: response
       });
     });
   }
@@ -69,12 +76,12 @@ class Reviews extends React.Component {
   }
 
   render() {
-    const { cards, createPopupVisible } = this.state;
+    const { cards, createPopupVisible, cardContainerList } = this.state;
     const content = cardContainerList.map((cardContainer) => (
       <CardContainer
-        key={cardContainer.type}
-        title={cardContainer.title}
-        cardList={cards.filter((e) => e.type === cardContainer.type)}
+        key={cardContainer.code}
+        title={cardContainer.name}
+        cardList={cards.filter((e) => e.type === cardContainer.code)}
         onCardDeleteClick={this.onCardDeleteClick}
       />
     ));
