@@ -1,10 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import reviewApi from '../../API/reviewApi';
+import { deleteReview } from '../../store/reviews/actionCreators';
 
 import './Card.css';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
 
+function handleDeleteClick(props, id) {
+  reviewApi.del(id).then(() => {
+    props.deleteReview(id);
+  });
+}
+
 const Card = (props) => {
-  const { posterUrl, title, onCardDeleteClick } = props;
+  const { id, posterUrl, title } = props;
 
   const poster = posterUrl ? (
     <img className="card__poster" alt="" src={posterUrl} />
@@ -21,7 +31,7 @@ const Card = (props) => {
       <button
         type="button"
         className="card__delete-button text"
-        onClick={onCardDeleteClick}
+        onClick={() => handleDeleteClick(props, id)}
       >
         x
       </button>
@@ -29,4 +39,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export default connect(null, { deleteReview })(Card);

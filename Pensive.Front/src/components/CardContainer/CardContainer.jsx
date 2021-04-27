@@ -57,15 +57,15 @@ class CardContainer extends React.Component {
   }
 
   render() {
-    const { title, cardList, onCardDeleteClick } = this.props;
+    const { title, cardList } = this.props;
     const { scrollIsVisible, isExpand } = this.state;
 
     const cardElements = cardList.map((card) => (
       <Card
         key={card.id}
+        id={card.id}
         posterUrl={card.posterUrl}
         title={card.title}
-        onCardDeleteClick={() => onCardDeleteClick(card.id)}
       />
     ));
 
