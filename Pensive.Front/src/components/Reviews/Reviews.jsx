@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import reviewApi from '../../API/reviewApi';
 import reviewTypeApi from '../../API/reviewTypeApi';
 import { getAllReviews } from '../../store/reviews/actionCreators';
+import { getAllReviewTypes } from '../../store/reviewTypes/actionCreators';
 
 import './Reviews.css';
 import CardForm from '../CardForm';
@@ -14,7 +15,6 @@ class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardContainerList: [],
       createPopupVisible: false
     };
   }
@@ -25,9 +25,7 @@ class Reviews extends React.Component {
     });
 
     reviewTypeApi.getAll().then((response) => {
-      this.setState({
-        cardContainerList: response
-      });
+      this.props.getAllReviewTypes(response);
     });
   }
 
@@ -44,8 +42,8 @@ class Reviews extends React.Component {
   }
 
   render() {
-    const { cards } = this.props;
-    const { createPopupVisible, cardContainerList } = this.state;
+    const { cards, cardContainerList } = this.props;
+    const { createPopupVisible } = this.state;
     const content = cardContainerList.map((cardContainer) => (
       <CardContainer
         key={cardContainer.code}
@@ -68,10 +66,7 @@ class Reviews extends React.Component {
           isVisible={createPopupVisible}
           handleCloseClick={() => this.handleClosePopupClick()}
         >
-          <CardForm
-            cardTypes={cardContainerList}
-            handleCloseClick={() => this.handleClosePopupClick()}
-          />
+          <CardForm handleCloseClick={() => this.handleClosePopupClick()} />
         </Popup>
       </div>
     );
@@ -80,7 +75,12 @@ class Reviews extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    cards: state
+    cards: state.reviews,
+    cardContainerList: state.reviewTypes
   };
 }
-export default connect(mapStateToProps, { getAllReviews })(Reviews);
+const actionCreators = {
+  getAllReviews,
+  getAllReviewTypes
+};
+export default connect(mapStateToProps, actionCreators)(Reviews);

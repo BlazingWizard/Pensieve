@@ -8,10 +8,11 @@ class CardForm extends React.Component {
   constructor(props) {
     super(props);
 
-    const { cardTypes } = this.props;
+    const { reviewTypes } = this.props;
     this.state = {
       title: '',
-      type: cardTypes[0].code,
+      // FIX ME if reviewTypes is empty array, then an error will occur
+      type: reviewTypes[0].code,
       reviewText: '',
       mark: 0
     };
@@ -40,7 +41,7 @@ class CardForm extends React.Component {
   }
 
   render() {
-    const { cardTypes } = this.props;
+    const { reviewTypes } = this.props;
     const { title, type, reviewText, mark } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
@@ -56,7 +57,7 @@ class CardForm extends React.Component {
         <label htmlFor="type">
           Type:
           <select name="type" value={type} onChange={this.handleInputChange}>
-            {cardTypes.map((cardType) => (
+            {reviewTypes.map((cardType) => (
               <option key={cardType.code} value={cardType.code}>
                 {cardType.name}
               </option>
@@ -87,4 +88,9 @@ class CardForm extends React.Component {
   }
 }
 
-export default connect(null, { addReview })(CardForm);
+function mapStateToProps(state) {
+  return {
+    reviewTypes: state.reviewTypes
+  };
+}
+export default connect(mapStateToProps, { addReview })(CardForm);

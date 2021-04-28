@@ -1,6 +1,6 @@
 import { REVIEW_ADD, REVIEW_DELETE, REVIEW_GET_ALL } from './types';
 
-function reviews(state = [], action) {
+function reviewsReducer(state = [], action) {
   switch (action.type) {
     case REVIEW_GET_ALL:
       return action.payload;
@@ -13,4 +13,4 @@ function reviews(state = [], action) {
   }
 }
 
-export default reviews;
+export default reviewsReducer;
