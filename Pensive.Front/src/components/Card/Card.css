@@ -63,7 +63,8 @@
 }
 
 .card__text {
-  font-weight: bolder;
+  font-weight: bold;
+  text-align: center;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #000000;
 }
