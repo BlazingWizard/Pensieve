@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import reviewApi from '../../API/reviewApi';
+import { addReview } from '../../store/reviews/actionCreators';
 
 class CardForm extends React.Component {
   constructor(props) {
@@ -25,10 +29,13 @@ class CardForm extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    const { handleCloseClick } = this.props;
 
-    const { onCardAddClick, handleCloseClick } = this.props;
-    onCardAddClick(this.state);
+    event.preventDefault();
+    reviewApi.create(this.state).then((response) => {
+      this.props.addReview(response);
+    });
+
     handleCloseClick();
   }
 
@@ -80,4 +87,4 @@ class CardForm extends React.Component {
   }
 }
 
-export default CardForm;
+export default connect(null, { addReview })(CardForm);
