@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import reviewApi from '../../API/reviewApi';
-import { addReview } from '../../store/reviews/actionCreators';
+import { addReviewAction } from '../../store/reviews/asyncActions';
 
 class CardForm extends React.Component {
   constructor(props) {
@@ -30,13 +29,10 @@ class CardForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const { handleCloseClick } = this.props;
-
     event.preventDefault();
-    reviewApi.create(this.state).then((response) => {
-      this.props.addReview(response);
-    });
 
+    const { handleCloseClick, addReview } = this.props;
+    addReview(this.state);
     handleCloseClick();
   }
 
@@ -93,4 +89,14 @@ function mapStateToProps(state) {
     reviewTypes: state.reviewTypes
   };
 }
-export default connect(mapStateToProps, { addReview })(CardForm);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addReview: (review) => {
+      const addReviewThunk = addReviewAction(review);
+      dispatch(addReviewThunk);
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

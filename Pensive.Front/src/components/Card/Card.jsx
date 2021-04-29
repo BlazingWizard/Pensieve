@@ -1,16 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import reviewApi from '../../API/reviewApi';
-import { deleteReview } from '../../store/reviews/actionCreators';
-
 import './Card.css';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
+import { deleteReviewAction } from '../../store/reviews/asyncActions';
 
 function handleDeleteClick(props, id) {
-  reviewApi.del(id).then(() => {
-    props.deleteReview(id);
-  });
+  const { deleteReview } = props;
+  deleteReview(id);
 }
 
 const Card = (props) => {
@@ -39,4 +36,12 @@ const Card = (props) => {
   );
 };
 
-export default connect(null, { deleteReview })(Card);
+function mapDispatchToProps(dispatch) {
+  return {
+    deleteReview: (id) => {
+      const deleteThunk = deleteReviewAction(id);
+      dispatch(deleteThunk);
+    }
+  };
+}
+export default connect(null, mapDispatchToProps)(Card);

@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import reviewApi from '../../API/reviewApi';
-import reviewTypeApi from '../../API/reviewTypeApi';
-import { getAllReviews } from '../../store/reviews/actionCreators';
-import { getAllReviewTypes } from '../../store/reviewTypes/actionCreators';
+import { getAllReviewsAction } from '../../store/reviews/asyncActions';
+import { getAllReviewTypesAction } from '../../store/reviewTypes/asyncActions';
 
 import './Reviews.css';
 import CardForm from '../CardForm';
@@ -20,13 +18,9 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    reviewApi.getAll().then((response) => {
-      this.props.getAllReviews(response);
-    });
-
-    reviewTypeApi.getAll().then((response) => {
-      this.props.getAllReviewTypes(response);
-    });
+    const { getAllReviews, getAllReviewTypes } = this.props;
+    getAllReviews();
+    getAllReviewTypes();
   }
 
   handleCreatePopupClick() {
@@ -79,8 +73,12 @@ function mapStateToProps(state) {
     cardContainerList: state.reviewTypes
   };
 }
-const actionCreators = {
-  getAllReviews,
-  getAllReviewTypes
-};
-export default connect(mapStateToProps, actionCreators)(Reviews);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllReviews: () => dispatch(getAllReviewsAction),
+    getAllReviewTypes: () => dispatch(getAllReviewTypesAction)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reviews);

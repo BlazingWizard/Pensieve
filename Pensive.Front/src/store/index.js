@@ -1,4 +1,6 @@
-import { combineReducers, createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunkMiddleware from 'redux-thunk';
 
 import reviewsReducer from './reviews/reducer';
 import reviewTypesReducer from './reviewTypes/reducer';
@@ -8,8 +10,7 @@ const store = createStore(
     reviews: reviewsReducer,
     reviewTypes: reviewTypesReducer
   }),
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunkMiddleware))
 );
 
 export default store;
