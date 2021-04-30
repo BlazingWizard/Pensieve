@@ -18,8 +18,6 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
-    "react/prop-types": "warn",
-    "react/destructuring-assignment": "off"
+    "prettier/prettier": "error"
   }
 }
