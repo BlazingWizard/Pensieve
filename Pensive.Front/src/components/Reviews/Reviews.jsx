@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getAllReviewsAction } from '../../store/reviews/asyncActions';
@@ -66,6 +67,18 @@ class Reviews extends React.Component {
     );
   }
 }
+
+Reviews.propTypes = {
+  cards: PropTypes.arrayOf(PropTypes.object),
+  cardContainerList: PropTypes.arrayOf(PropTypes.object),
+  getAllReviews: PropTypes.func.isRequired,
+  getAllReviewTypes: PropTypes.func.isRequired
+};
+
+Reviews.defaultProps = {
+  cards: [],
+  cardContainerList: []
+};
 
 function mapStateToProps(state) {
   return {

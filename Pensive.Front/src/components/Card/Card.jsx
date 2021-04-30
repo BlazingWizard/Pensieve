@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import './Card.css';
@@ -34,6 +35,16 @@ const Card = (props) => {
       </button>
     </li>
   );
+};
+
+Card.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  posterUrl: PropTypes.string
+};
+
+Card.defaultProps = {
+  posterUrl: ''
 };
 
 function mapDispatchToProps(dispatch) {

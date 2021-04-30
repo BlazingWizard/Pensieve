@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Popup.css';
 
@@ -31,5 +32,15 @@ class Popup extends React.Component {
     );
   }
 }
+
+Popup.propTypes = {
+  isVisible: PropTypes.bool,
+  children: PropTypes.element.isRequired,
+  handleCloseClick: PropTypes.func.isRequired
+};
+
+Popup.defaultProps = {
+  isVisible: false
+};
 
 export default Popup;

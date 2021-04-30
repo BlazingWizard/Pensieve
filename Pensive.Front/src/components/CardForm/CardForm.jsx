@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { addReviewAction } from '../../store/reviews/asyncActions';
@@ -98,5 +99,15 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
+
+CardForm.propTypes = {
+  reviewTypes: PropTypes.arrayOf(PropTypes.object),
+  addReview: PropTypes.func.isRequired,
+  handleCloseClick: PropTypes.func.isRequired
+};
+
+CardForm.defaultProps = {
+  reviewTypes: []
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './CardContainer.css';
-import Card from '../Card/Card';
+import Card from '../Card';
 
 class CardContainer extends React.Component {
   constructor(props) {
@@ -115,5 +116,14 @@ class CardContainer extends React.Component {
     );
   }
 }
+
+CardContainer.propTypes = {
+  title: PropTypes.string.isRequired,
+  cardList: PropTypes.arrayOf(PropTypes.object)
+};
+
+CardContainer.defaultProps = {
+  cardList: []
+};
 
 export default CardContainer;
