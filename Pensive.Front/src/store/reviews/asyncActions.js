@@ -15,8 +15,8 @@ function deleteReviewAction(id) {
 
 function addReviewAction(review) {
   return async (dispatch) => {
-    await reviewApi.create(review);
-    dispatch(addReview(review));
+    const response = await reviewApi.create(review);
+    dispatch(addReview(response));
   };
 }
 
