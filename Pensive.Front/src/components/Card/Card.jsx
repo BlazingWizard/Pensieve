@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './Card.css';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
 import { deleteReviewAction } from '../../store/reviews/asyncActions';
 
-function handleDeleteClick(props, id) {
-  const { deleteReview } = props;
-  deleteReview(id);
-}
-
-const Card = (props) => {
-  const { id, posterUrl, title } = props;
+const Card = ({ id, posterUrl, title }) => {
+  const dispatch = useDispatch();
+  const handleDeleteClick = () => {
+    const deleteThunk = deleteReviewAction(id);
+    dispatch(deleteThunk);
+  };
 
   const poster = posterUrl ? (
     <img className="card__poster" alt="" src={posterUrl} />
@@ -29,7 +28,7 @@ const Card = (props) => {
       <button
         type="button"
         className="card__delete-button text"
-        onClick={() => handleDeleteClick(props, id)}
+        onClick={handleDeleteClick}
       >
         x
       </button>
@@ -47,12 +46,4 @@ Card.defaultProps = {
   posterUrl: ''
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    deleteReview: (id) => {
-      const deleteThunk = deleteReviewAction(id);
-      dispatch(deleteThunk);
-    }
-  };
-}
-export default connect(null, mapDispatchToProps)(Card);
+export default Card;

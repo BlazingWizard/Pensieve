@@ -1,120 +1,95 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import './CardContainer.css';
 import Card from '../Card';
 
-class CardContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.cardList = React.createRef();
-    this.state = {
-      currentLeftOffset: 0,
-      scrollIsVisible: false,
-      isExpand: false
-    };
-  }
+function CardContainer(props) {
+  const cardListElement = useRef();
 
-  componentDidMount() {
-    this.updateScrollIsVisibleState();
-  }
+  // Handle scroll position
+  const [leftOffset, setLeftOffset] = useState(0);
+  const handleScroll = (scrollEvent) => {
+    setLeftOffset(scrollEvent.target.scrollLeft);
+  };
+  const handleBackwardClick = () => {
+    setLeftOffset(0);
+  };
+  const handleForwardClick = () => {
+    const maxOffset = cardListElement.current.scrollWidth;
+    setLeftOffset(maxOffset);
+  };
+  useEffect(() => {
+    cardListElement.current.scrollLeft = leftOffset;
+  }, [leftOffset]);
 
-  componentDidUpdate() {
-    const { currentLeftOffset } = this.state;
-    this.cardList.current.scrollLeft = currentLeftOffset;
+  // Handle scroll visible
+  const [scrollIsVisible, setScrollIsVisible] = useState(false);
+  useEffect(() => {
+    const { clientWidth, scrollWidth } = cardListElement.current;
+    setScrollIsVisible(clientWidth !== scrollWidth);
+  });
 
-    this.updateScrollIsVisibleState();
-  }
+  // Handle card container expend
+  const [isExpand, setIsExpand] = useState(false);
+  const handleToggleExpandClick = () => {
+    setIsExpand((prevIsExpand) => !prevIsExpand);
+  };
 
-  handleToggleExpandClick() {
-    this.setState((state) => ({ isExpand: !state.isExpand }));
-  }
+  const { title, cardList } = props;
+  const cardElements = cardList.map((card) => (
+    <Card
+      key={card.id}
+      id={card.id}
+      posterUrl={card.posterUrl}
+      title={card.title}
+    />
+  ));
 
-  handleBackwardClick() {
-    this.setState({ currentLeftOffset: 0 });
-  }
+  const isExpandClass = isExpand ? 'card-container__cards_isexpand' : '';
+  const expandButtonText = isExpand ? '-' : '+';
 
-  handleForwardClick() {
-    const maxOffset = this.cardList.current.scrollWidth;
-    this.setState({ currentLeftOffset: maxOffset });
-  }
-
-  handleScroll(e) {
-    this.setState({
-      currentLeftOffset: e.target.scrollLeft
-    });
-  }
-
-  updateScrollIsVisibleState() {
-    const { current } = this.cardList;
-
-    this.setState((state) => {
-      const scrollIsVisible = current.clientWidth !== current.scrollWidth;
-      if (state.scrollIsVisible !== scrollIsVisible) {
-        return { scrollIsVisible };
-      }
-      return null;
-    });
-  }
-
-  render() {
-    const { title, cardList } = this.props;
-    const { scrollIsVisible, isExpand } = this.state;
-
-    const cardElements = cardList.map((card) => (
-      <Card
-        key={card.id}
-        id={card.id}
-        posterUrl={card.posterUrl}
-        title={card.title}
-      />
-    ));
-
-    const isExpandClass = isExpand ? 'card-container__cards_isexpand' : '';
-    const expandButtonText = isExpand ? '-' : '+';
-
-    return (
-      <div className="card-container">
-        <h1 className="card-container__header header">{title}</h1>
-        {(scrollIsVisible || isExpand) && (
+  return (
+    <div className="card-container">
+      <h1 className="card-container__header header">{title}</h1>
+      {(scrollIsVisible || isExpand) && (
+        <button
+          type="button"
+          className="card-container__expand-button text"
+          onClick={handleToggleExpandClick}
+        >
+          {expandButtonText}
+        </button>
+      )}
+      <div className="card-container__root">
+        {scrollIsVisible && (
           <button
             type="button"
-            className="card-container__expand-button text"
-            onClick={() => this.handleToggleExpandClick()}
+            className="card-container__nav-button card-container__backward-button"
+            onClick={handleBackwardClick}
           >
-            {expandButtonText}
+            &lt;
           </button>
         )}
-        <div className="card-container__root">
-          {scrollIsVisible && (
-            <button
-              type="button"
-              className="card-container__nav-button card-container__backward-button"
-              onClick={() => this.handleBackwardClick()}
-            >
-              &lt;
-            </button>
-          )}
-          <ul
-            className={`card-container__cards ${isExpandClass}`}
-            onScroll={(e) => this.handleScroll(e)}
-            ref={this.cardList}
+        <ul
+          className={`card-container__cards ${isExpandClass}`}
+          onScroll={(e) => handleScroll(e)}
+          ref={cardListElement}
+        >
+          {cardElements}
+        </ul>
+        {scrollIsVisible && (
+          <button
+            type="button"
+            className="card-container__nav-button card-container__forward-button"
+            onClick={handleForwardClick}
           >
-            {cardElements}
-          </ul>
-          {scrollIsVisible && (
-            <button
-              type="button"
-              className="card-container__nav-button card-container__forward-button"
-              onClick={() => this.handleForwardClick()}
-            >
-              &gt;
-            </button>
-          )}
-        </div>
+            &gt;
+          </button>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 CardContainer.propTypes = {
