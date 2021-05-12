@@ -130,3 +130,7 @@ FakesAssemblies/
 
 Migrations/
 *.db
+
+react-app-env.d.ts
+
+.vscode/
