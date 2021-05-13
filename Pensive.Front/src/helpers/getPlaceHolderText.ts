@@ -1,4 +1,4 @@
-function getPlaceHolderText(text) {
+function getPlaceHolderText(text: string): string {
   const defaultPlaceholder = text
     .replace(/\W/g, '')
     .split('')

@@ -1,12 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import './Card.css';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
 import { deleteReviewAction } from '../../store/reviews/asyncActions';
 
-const Card = ({ id, posterUrl, title }) => {
+interface CardProps {
+  id: number;
+  posterUrl: string;
+  title: string;
+}
+
+const Card = (props: CardProps) => {
+  const { id, title, posterUrl = '' } = props;
+
   const dispatch = useDispatch();
   const handleDeleteClick = () => {
     const deleteThunk = deleteReviewAction(id);
@@ -34,16 +41,6 @@ const Card = ({ id, posterUrl, title }) => {
       </button>
     </li>
   );
-};
-
-Card.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  posterUrl: PropTypes.string
-};
-
-Card.defaultProps = {
-  posterUrl: ''
 };
 
 export default Card;

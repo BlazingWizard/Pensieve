@@ -1,8 +1,6 @@
-function combineUrl(parts) {
+function combineUrl(parts: Array<string>): string {
   const partsWithSlash = parts.map((part) =>
-    String(part)
-      .trim()
-      .replaceAll(/(^\/|\/$)/g, '')
+    part.trim().replaceAll(/(^\/|\/$)/g, '')
   );
 
   return partsWithSlash.join('/');
