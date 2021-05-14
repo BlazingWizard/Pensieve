@@ -1,9 +1,5 @@
 import createApi from './createApi';
-
-interface ReviewType {
-  name: string;
-  code: string;
-}
+import { ReviewType } from './types';
 
 const reviewTypeApi = createApi<ReviewType>(`reviews/types`);
 

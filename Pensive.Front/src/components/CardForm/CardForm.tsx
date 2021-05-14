@@ -1,10 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { ReviewType } from '../../API/types';
 import { addReviewAction } from '../../store/reviews/asyncActions';
 
-class CardForm extends React.Component {
+type FormInputs = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+
+type CardFormProps = typeof CardForm.defaultProps & {
+  reviewTypes: Array<ReviewType>;
+  addReview: (state: CardFromState) => void;
+  handleCloseClick: () => void;
+};
+
+interface CardFromState {
+  type: string;
+  mark: string;
+  title: string;
+  reviewText: string;
+}
+
+class CardForm extends React.Component<CardFormProps, CardFromState> {
+  static defaultProps = {
+    reviewTypes: [] as Array<ReviewType>
+  };
+
   constructor(props) {
     super(props);
 
@@ -14,19 +33,19 @@ class CardForm extends React.Component {
       // FIX ME if reviewTypes is empty array, then an error will occur
       type: reviewTypes[0].code,
       reviewText: '',
-      mark: 0
+      mark: '0'
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange(event) {
+  handleInputChange(event: React.ChangeEvent<FormInputs>) {
     const { name, value } = event.target;
 
     this.setState({
       [name]: value
-    });
+    } as Pick<CardFromState, keyof CardFromState>);
   }
 
   handleSubmit(event) {
@@ -99,15 +118,5 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
-
-CardForm.propTypes = {
-  reviewTypes: PropTypes.arrayOf(PropTypes.object),
-  addReview: PropTypes.func.isRequired,
-  handleCloseClick: PropTypes.func.isRequired
-};
-
-CardForm.defaultProps = {
-  reviewTypes: []
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardForm);

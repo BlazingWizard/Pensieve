@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getAllReviewsAction } from '../../store/reviews/asyncActions';
@@ -9,9 +8,26 @@ import './Reviews.css';
 import CardForm from '../CardForm';
 import CardContainer from '../CardContainer';
 import Popup from '../../elements/Popup';
+import { Review, ReviewType } from '../../API/types';
 
-class Reviews extends React.Component {
-  constructor(props) {
+interface ReviewsProps {
+  cards: Array<Review>;
+  cardContainerList: Array<ReviewType>;
+  getAllReviews: () => void;
+  getAllReviewTypes: () => void;
+}
+
+interface ReviewState {
+  createPopupVisible: boolean;
+}
+
+class Reviews extends React.Component<ReviewsProps, ReviewState> {
+  static defaultProps = {
+    cards: [] as Array<Review>,
+    cardContainerList: [] as Array<ReviewType>
+  };
+
+  constructor(props: ReviewsProps) {
     super(props);
     this.state = {
       createPopupVisible: false
@@ -67,18 +83,6 @@ class Reviews extends React.Component {
     );
   }
 }
-
-Reviews.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object),
-  cardContainerList: PropTypes.arrayOf(PropTypes.object),
-  getAllReviews: PropTypes.func.isRequired,
-  getAllReviewTypes: PropTypes.func.isRequired
-};
-
-Reviews.defaultProps = {
-  cards: [],
-  cardContainerList: []
-};
 
 function mapStateToProps(state) {
   return {

@@ -1,14 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './Popup.css';
 
-class Popup extends React.Component {
-  componentDidUpdate() {
+interface PopupProps {
+  isVisible: boolean;
+  children: JSX.Element;
+  handleCloseClick: () => void;
+}
+
+class Popup extends React.Component<PopupProps> {
+  componentDidUpdate(): void {
     this.updateBackgroundScrollState();
   }
 
-  updateBackgroundScrollState() {
+  updateBackgroundScrollState(): void {
     const { isVisible } = this.props;
     const overflow = isVisible ? 'hidden' : 'auto';
     document.body.style.overflow = overflow;
@@ -32,15 +37,5 @@ class Popup extends React.Component {
     );
   }
 }
-
-Popup.propTypes = {
-  isVisible: PropTypes.bool,
-  children: PropTypes.element.isRequired,
-  handleCloseClick: PropTypes.func.isRequired
-};
-
-Popup.defaultProps = {
-  isVisible: false
-};
 
 export default Popup;

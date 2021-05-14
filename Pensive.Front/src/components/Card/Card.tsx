@@ -7,12 +7,12 @@ import { deleteReviewAction } from '../../store/reviews/asyncActions';
 
 interface CardProps {
   id: number;
-  posterUrl: string;
   title: string;
+  posterUrl?: string;
 }
 
-const Card = (props: CardProps) => {
-  const { id, title, posterUrl = '' } = props;
+const Card = (props: CardProps): JSX.Element => {
+  const { id, title, posterUrl } = props;
 
   const dispatch = useDispatch();
   const handleDeleteClick = () => {
@@ -41,6 +41,10 @@ const Card = (props: CardProps) => {
       </button>
     </li>
   );
+};
+
+Card.defaultProps = {
+  posterUrl: ''
 };
 
 export default Card;

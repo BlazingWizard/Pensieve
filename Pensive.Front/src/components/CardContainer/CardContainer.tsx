@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 
 import './CardContainer.css';
 import Card from '../Card';
+import { Review } from '../../API/types';
 
-function CardContainer(props) {
-  const cardListElement = useRef();
+interface CardContainerProps {
+  title: string;
+  cardList: Array<Review>;
+}
+
+function CardContainer(props: CardContainerProps): JSX.Element {
+  const cardListRef = useRef<HTMLUListElement>(null);
 
   // Handle scroll position
   const [leftOffset, setLeftOffset] = useState(0);
@@ -16,17 +21,27 @@ function CardContainer(props) {
     setLeftOffset(0);
   };
   const handleForwardClick = () => {
-    const maxOffset = cardListElement.current.scrollWidth;
+    if (cardListRef.current === null) {
+      throw Error('Card list ref not assign');
+    }
+    const maxOffset = cardListRef.current.scrollWidth;
     setLeftOffset(maxOffset);
   };
   useEffect(() => {
-    cardListElement.current.scrollLeft = leftOffset;
+    if (cardListRef.current === null) {
+      throw Error('Card list ref not assign');
+    }
+    cardListRef.current.scrollLeft = leftOffset;
   }, [leftOffset]);
 
   // Handle scroll visible
   const [scrollIsVisible, setScrollIsVisible] = useState(false);
   useEffect(() => {
-    const { clientWidth, scrollWidth } = cardListElement.current;
+    if (cardListRef.current === null) {
+      throw Error('Card list ref not assign');
+    }
+
+    const { clientWidth, scrollWidth } = cardListRef.current;
     setScrollIsVisible(clientWidth !== scrollWidth);
   });
 
@@ -74,7 +89,7 @@ function CardContainer(props) {
         <ul
           className={`card-container__cards ${isExpandClass}`}
           onScroll={(e) => handleScroll(e)}
-          ref={cardListElement}
+          ref={cardListRef}
         >
           {cardElements}
         </ul>
@@ -91,14 +106,5 @@ function CardContainer(props) {
     </div>
   );
 }
-
-CardContainer.propTypes = {
-  title: PropTypes.string.isRequired,
-  cardList: PropTypes.arrayOf(PropTypes.object)
-};
-
-CardContainer.defaultProps = {
-  cardList: []
-};
 
 export default CardContainer;

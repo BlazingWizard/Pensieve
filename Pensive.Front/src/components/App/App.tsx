@@ -6,7 +6,7 @@ import './App.css';
 import Routes from '../../routes';
 import store from '../../store';
 
-function App() {
+function App(): JSX.Element {
   return (
     <Provider store={store}>
       <BrowserRouter>
