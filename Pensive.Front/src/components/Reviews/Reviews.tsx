@@ -8,7 +8,9 @@ import './Reviews.css';
 import CardForm from '../CardForm';
 import CardContainer from '../CardContainer';
 import Popup from '../../elements/Popup';
-import { Review, ReviewType } from '../../API/types';
+
+import Review from '../../models/Review';
+import ReviewType from '../../models/ReviewType';
 
 interface ReviewsProps {
   cards: Array<Review>;

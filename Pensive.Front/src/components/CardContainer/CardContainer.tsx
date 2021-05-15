@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import './CardContainer.css';
 import Card from '../Card';
-import { Review } from '../../API/types';
+import Review from '../../models/Review';
 
 interface CardContainerProps {
   title: string;

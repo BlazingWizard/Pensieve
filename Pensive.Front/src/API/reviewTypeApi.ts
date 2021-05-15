@@ -1,5 +1,5 @@
 import createApi from './createApi';
-import { ReviewType } from './types';
+import ReviewType from '../models/ReviewType';
 
 const reviewTypeApi = createApi<ReviewType>(`reviews/types`);
 

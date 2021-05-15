@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { ReviewType } from '../../API/types';
+import ReviewType from '../../models/ReviewType';
 import { addReviewAction } from '../../store/reviews/asyncActions';
 
 type FormInputs = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;

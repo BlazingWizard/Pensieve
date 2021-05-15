@@ -1,4 +1,4 @@
-import { REVIEW_ADD, REVIEW_DELETE, REVIEW_GET_ALL } from './types';
+import { REVIEW_ADD, REVIEW_DELETE, REVIEW_GET_ALL } from './actionTypes';
 
 function getAllReviews(reviews) {
   return {

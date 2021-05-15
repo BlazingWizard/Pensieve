@@ -1,6 +1,12 @@
-import { REVIEW_ADD, REVIEW_DELETE, REVIEW_GET_ALL } from './types';
+import Review from '../../models/Review';
+import ReviewAction from './types';
 
-function reviewsReducer(state = [], action) {
+import { REVIEW_ADD, REVIEW_DELETE, REVIEW_GET_ALL } from './actionTypes';
+
+function reviewsReducer(
+  state: Array<Review> = [],
+  action: ReviewAction
+): Array<Review> {
   switch (action.type) {
     case REVIEW_GET_ALL:
       return action.payload;
