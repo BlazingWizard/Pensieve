@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { RootState, DispatchAsyncAction } from '../../store/types';
 import { getAllReviewsAction } from '../../store/reviews/asyncActions';
 import { getAllReviewTypesAction } from '../../store/reviewTypes/asyncActions';
 
@@ -86,14 +87,14 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
     cards: state.reviews,
     cardContainerList: state.reviewTypes
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: DispatchAsyncAction) {
   return {
     getAllReviews: () => dispatch(getAllReviewsAction),
     getAllReviewTypes: () => dispatch(getAllReviewTypesAction)

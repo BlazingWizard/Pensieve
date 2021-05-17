@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ReviewType from '../../models/ReviewType';
+import { DispatchAsyncAction, RootState } from '../../store/types';
 import { addReviewAction } from '../../store/reviews/asyncActions';
+
+import Review from '../../models/Review';
+import ReviewType from '../../models/ReviewType';
 
 type FormInputs = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
 type CardFormProps = typeof CardForm.defaultProps & {
   reviewTypes: Array<ReviewType>;
-  addReview: (state: CardFromState) => void;
+  addReview: (review: Review) => void;
   handleCloseClick: () => void;
 };
 
@@ -24,7 +27,7 @@ class CardForm extends React.Component<CardFormProps, CardFromState> {
     reviewTypes: [] as Array<ReviewType>
   };
 
-  constructor(props) {
+  constructor(props: CardFormProps) {
     super(props);
 
     const { reviewTypes } = this.props;
@@ -48,11 +51,16 @@ class CardForm extends React.Component<CardFormProps, CardFromState> {
     } as Pick<CardFromState, keyof CardFromState>);
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
 
     const { handleCloseClick, addReview } = this.props;
-    addReview(this.state);
+
+    const review = {
+      id: 0,
+      ...this.state
+    };
+    addReview(review);
     handleCloseClick();
   }
 
@@ -104,15 +112,15 @@ class CardForm extends React.Component<CardFormProps, CardFromState> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
     reviewTypes: state.reviewTypes
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: DispatchAsyncAction) {
   return {
-    addReview: (review) => {
+    addReview: (review: Review) => {
       const addReviewThunk = addReviewAction(review);
       dispatch(addReviewThunk);
     }

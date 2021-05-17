@@ -1,20 +1,22 @@
+import Review from '../../models/Review';
 import reviewApi from '../../API/reviewApi';
+import { Dispatch } from '../types';
 import { getAllReviews, addReview, deleteReview } from './actionCreators';
 
-async function getAllReviewsAction(dispatch) {
+async function getAllReviewsAction(dispatch: Dispatch): Promise<void> {
   const reviews = await reviewApi.getAll();
   dispatch(getAllReviews(reviews));
 }
 
-function deleteReviewAction(id) {
-  return async (dispatch) => {
+function deleteReviewAction(id: number) {
+  return async (dispatch: Dispatch): Promise<void> => {
     await reviewApi.del(id);
     dispatch(deleteReview(id));
   };
 }
 
-function addReviewAction(review) {
-  return async (dispatch) => {
+function addReviewAction(review: Review) {
+  return async (dispatch: Dispatch): Promise<void> => {
     const response = await reviewApi.create(review);
     dispatch(addReview(response));
   };

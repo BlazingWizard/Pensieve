@@ -1,5 +1,5 @@
 import Review from '../../models/Review';
-import ReviewAction from './types';
+import { ReviewAction } from './types';
 
 import { REVIEW_ADD, REVIEW_DELETE, REVIEW_GET_ALL } from './actionTypes';
 

@@ -4,7 +4,7 @@ import './Popup.css';
 
 interface PopupProps {
   isVisible: boolean;
-  children: JSX.Element;
+  children: React.ReactElement;
   handleCloseClick: () => void;
 }
 
@@ -19,7 +19,7 @@ class Popup extends React.Component<PopupProps> {
     document.body.style.overflow = overflow;
   }
 
-  render() {
+  render(): React.ReactElement | null {
     const { children, handleCloseClick, isVisible } = this.props;
     if (!isVisible) {
       return null;

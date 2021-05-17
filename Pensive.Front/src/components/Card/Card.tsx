@@ -11,7 +11,7 @@ interface CardProps {
   posterUrl?: string;
 }
 
-const Card = (props: CardProps): JSX.Element => {
+const Card = (props: CardProps): React.ReactElement => {
   const { id, title, posterUrl } = props;
 
   const dispatch = useDispatch();

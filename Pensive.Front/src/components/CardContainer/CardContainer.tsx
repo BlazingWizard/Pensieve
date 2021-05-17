@@ -9,13 +9,13 @@ interface CardContainerProps {
   cardList: Array<Review>;
 }
 
-function CardContainer(props: CardContainerProps): JSX.Element {
+function CardContainer(props: CardContainerProps): React.ReactElement {
   const cardListRef = useRef<HTMLUListElement>(null);
 
   // Handle scroll position
   const [leftOffset, setLeftOffset] = useState(0);
-  const handleScroll = (scrollEvent) => {
-    setLeftOffset(scrollEvent.target.scrollLeft);
+  const handleScroll = (scrollEvent: React.UIEvent<HTMLUListElement>) => {
+    setLeftOffset(scrollEvent.currentTarget.scrollLeft);
   };
   const handleBackwardClick = () => {
     setLeftOffset(0);
