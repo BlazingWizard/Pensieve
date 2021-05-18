@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { DispatchAsyncAction, RootState } from '../../store/types';
 import { addReviewAction } from '../../store/reviews/asyncActions';
 
+import './ReviewForm.css';
 import Review from '../../models/Review';
 import ReviewType from '../../models/ReviewType';
 
@@ -44,10 +45,10 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
   }
 
   handleInputChange(event: React.ChangeEvent<FormInputs>) {
-    const { name, value } = event.target;
+    const { id, value } = event.target;
 
     this.setState({
-      [name]: value
+      [id]: value
     } as Pick<ReviewFromState, keyof ReviewFromState>);
   }
 
@@ -68,45 +69,56 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
     const { reviewTypes } = this.props;
     const { title, type, reviewText, mark } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="title">
+      <form onSubmit={this.handleSubmit} className="review-form">
+        <label className="review-form__label" htmlFor="title">
           Title:
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={this.handleInputChange}
-          />
         </label>
-        <label htmlFor="type">
+        <input
+          className="review-form__input"
+          type="text"
+          id="title"
+          value={title}
+          onChange={this.handleInputChange}
+        />
+        <label className="review-form__label" htmlFor="type">
           Type:
-          <select name="type" value={type} onChange={this.handleInputChange}>
-            {reviewTypes.map((cardType) => (
-              <option key={cardType.code} value={cardType.code}>
-                {cardType.name}
-              </option>
-            ))}
-          </select>
         </label>
-        <label htmlFor="reviewText">
+        <select
+          className="review-form__input"
+          id="type"
+          value={type}
+          onChange={this.handleInputChange}
+        >
+          {reviewTypes.map((cardType) => (
+            <option key={cardType.code} value={cardType.code}>
+              {cardType.name}
+            </option>
+          ))}
+        </select>
+        <label className="review-form__label" htmlFor="reviewText">
           Review text:
-          <textarea
-            name="reviewText"
-            value={reviewText}
-            onChange={this.handleInputChange}
-          />
         </label>
-        <label htmlFor="mark">
-          <input
-            type="number"
-            name="mark"
-            min="0"
-            max="10"
-            value={mark}
-            onChange={this.handleInputChange}
-          />
+        <textarea
+          className="review-form__input review-form__text"
+          id="reviewText"
+          value={reviewText}
+          onChange={this.handleInputChange}
+        />
+        <label className="review-form__label" htmlFor="mark">
+          Mark:
         </label>
-        <button type="submit">Save</button>
+        <input
+          className="review-form__input"
+          type="number"
+          id="mark"
+          min="0"
+          max="10"
+          value={mark}
+          onChange={this.handleInputChange}
+        />
+        <button className="review-form__submit-button" type="submit">
+          Save
+        </button>
       </form>
     );
   }

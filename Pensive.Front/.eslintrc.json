@@ -21,6 +21,22 @@
   "plugins": ["@typescript-eslint", "react", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "react/static-property-placement": "off"
+    "react/static-property-placement": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ]
   }
 }

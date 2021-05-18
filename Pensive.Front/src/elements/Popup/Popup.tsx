@@ -28,7 +28,11 @@ class Popup extends React.Component<PopupProps> {
     return (
       <div className="popup__overlay">
         <div className="popup__content">
-          <button type="button" onClick={handleCloseClick}>
+          <button
+            className="popup__close-button"
+            type="button"
+            onClick={handleCloseClick}
+          >
             x
           </button>
           {children}

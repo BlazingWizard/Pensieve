@@ -1,0 +1,37 @@
+.review-form {
+  height: 100%;
+  display: grid;
+
+  grid-template-rows: 5% 5% auto 5% 5%;
+  grid-template-columns: max-content auto;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.review-form__label {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: #ffffff;
+}
+
+.review-form__input {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: #ffffff;
+  background-color: #363636;
+
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.review-form__submit-button {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  border: none;
+
+  color: #ffffff;
+  background-color: #363636;
+}
