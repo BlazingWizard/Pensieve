@@ -9,25 +9,25 @@ import ReviewType from '../../models/ReviewType';
 
 type FormInputs = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
-type CardFormProps = typeof CardForm.defaultProps & {
+type ReviewFormProps = typeof ReviewForm.defaultProps & {
   reviewTypes: Array<ReviewType>;
   addReview: (review: Review) => void;
   handleCloseClick: () => void;
 };
 
-interface CardFromState {
+interface ReviewFromState {
   type: string;
   mark: string;
   title: string;
   reviewText: string;
 }
 
-class CardForm extends React.Component<CardFormProps, CardFromState> {
+class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
   static defaultProps = {
     reviewTypes: [] as Array<ReviewType>
   };
 
-  constructor(props: CardFormProps) {
+  constructor(props: ReviewFormProps) {
     super(props);
 
     const { reviewTypes } = this.props;
@@ -48,7 +48,7 @@ class CardForm extends React.Component<CardFormProps, CardFromState> {
 
     this.setState({
       [name]: value
-    } as Pick<CardFromState, keyof CardFromState>);
+    } as Pick<ReviewFromState, keyof ReviewFromState>);
   }
 
   handleSubmit(event: React.SyntheticEvent) {
@@ -127,4 +127,4 @@ function mapDispatchToProps(dispatch: DispatchAsyncAction) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);

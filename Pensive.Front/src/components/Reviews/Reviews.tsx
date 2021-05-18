@@ -6,9 +6,9 @@ import { getAllReviewsAction } from '../../store/reviews/asyncActions';
 import { getAllReviewTypesAction } from '../../store/reviewTypes/asyncActions';
 
 import './Reviews.css';
-import CardForm from '../CardForm';
-import CardContainer from '../CardContainer';
 import Popup from '../../elements/Popup';
+import ReviewForm from '../ReviewForm';
+import CardContainer from '../CardContainer';
 
 import Review from '../../models/Review';
 import ReviewType from '../../models/ReviewType';
@@ -80,7 +80,7 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
           isVisible={createPopupVisible}
           handleCloseClick={() => this.handleClosePopupClick()}
         >
-          <CardForm handleCloseClick={() => this.handleClosePopupClick()} />
+          <ReviewForm handleCloseClick={() => this.handleClosePopupClick()} />
         </Popup>
       </div>
     );
