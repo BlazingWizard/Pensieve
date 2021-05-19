@@ -4,11 +4,54 @@
 }
 
 .menu__nav {
+  padding: 0px 0px;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+
+  height: 100vh;
+
+  background-color: #0a0a0a;
+  border-right: 1px solid #363636;
 }
 
 .menu__content {
-  padding: 5px;
+  padding: 5px 5px 0px 5px;
+}
+
+.menu__item {
+  padding: 5px 20px;
+  margin: 0px 5px;
+
+  color: white;
+  text-decoration: none;
+
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  border-top: 2px solid #141414;
+}
+
+.menu__item:last-child {
+  border-bottom: 2px solid #141414;
+}
+
+.menu__item.active {
+  font-weight: bold;
+  background: #363636;
+}
+
+.menu__logo-block {
+  padding: 0px 10px;
+}
+
+.menu__logo {
+  display: inline-block;
+
+  width: 30px;
+  height: 30px;
+}
+
+.menu__header {
+  display: inline-block;
+  margin: 10px;
 }
