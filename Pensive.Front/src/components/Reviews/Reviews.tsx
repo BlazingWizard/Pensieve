@@ -6,7 +6,7 @@ import { getAllReviewsAction } from '../../store/reviews/asyncActions';
 import { getAllReviewTypesAction } from '../../store/reviewTypes/asyncActions';
 
 import './Reviews.css';
-import Popup from '../../elements/Popup';
+import Popup from '../Popup';
 import ReviewForm from '../ReviewForm';
 import CardContainer from '../CardContainer';
 
