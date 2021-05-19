@@ -5,12 +5,15 @@ import { Provider } from 'react-redux';
 import './App.css';
 import Routes from '../../routes';
 import store from '../../store';
+import Menu from '../Menu';
 
 function App(): React.ReactElement {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Routes />
+        <Menu>
+          <Routes />
+        </Menu>
       </BrowserRouter>
     </Provider>
   );

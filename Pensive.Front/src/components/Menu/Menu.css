@@ -1,0 +1,14 @@
+.menu {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+.menu__nav {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.menu__content {
+  padding: 5px;
+}
