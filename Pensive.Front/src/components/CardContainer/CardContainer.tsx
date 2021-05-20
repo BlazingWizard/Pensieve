@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import './CardContainer.css';
-import Card from '../Card';
-import Review from '../../models/Review';
 
-interface CardContainerProps {
+interface CardContainerProps<T> {
   title: string;
-  cardList: Array<Review>;
+  data: Array<T>;
+  renderFunction: (data: T) => React.ReactElement;
 }
 
-function CardContainer(props: CardContainerProps): React.ReactElement {
+function CardContainer<T>(props: CardContainerProps<T>): React.ReactElement {
   const cardListRef = useRef<HTMLUListElement>(null);
 
   // Handle scroll position
@@ -51,18 +50,11 @@ function CardContainer(props: CardContainerProps): React.ReactElement {
     setIsExpand((prevIsExpand) => !prevIsExpand);
   };
 
-  const { title, cardList } = props;
-  const cardElements = cardList.map((card) => (
-    <Card
-      key={card.id}
-      id={card.id}
-      posterUrl={card.posterUrl}
-      title={card.title}
-    />
-  ));
-
   const isExpandClass = isExpand ? 'card-container__cards_isexpand' : '';
   const expandButtonText = isExpand ? '-' : '+';
+
+  const { title, data, renderFunction: renderData } = props;
+  const content = data.map(renderData);
 
   return (
     <div className="card-container">
@@ -91,7 +83,7 @@ function CardContainer(props: CardContainerProps): React.ReactElement {
           onScroll={(e) => handleScroll(e)}
           ref={cardListRef}
         >
-          {cardElements}
+          {content}
         </ul>
         {scrollIsVisible && (
           <button

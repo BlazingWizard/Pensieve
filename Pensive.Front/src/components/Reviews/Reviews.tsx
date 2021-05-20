@@ -7,6 +7,7 @@ import { getAllReviewTypesAction } from '../../store/reviewTypes/asyncActions';
 
 import './Reviews.css';
 import Popup from '../Popup';
+import ReviewCard from '../ReviewCard';
 import ReviewForm from '../ReviewForm';
 import CardContainer from '../CardContainer';
 
@@ -14,8 +15,8 @@ import Review from '../../models/Review';
 import ReviewType from '../../models/ReviewType';
 
 interface ReviewsProps {
-  cards: Array<Review>;
-  cardContainerList: Array<ReviewType>;
+  reviews: Array<Review>;
+  reviewTypes: Array<ReviewType>;
   getAllReviews: () => void;
   getAllReviewTypes: () => void;
 }
@@ -26,8 +27,8 @@ interface ReviewState {
 
 class Reviews extends React.Component<ReviewsProps, ReviewState> {
   static defaultProps = {
-    cards: [] as Array<Review>,
-    cardContainerList: [] as Array<ReviewType>
+    reviews: [] as Array<Review>,
+    reviewTypes: [] as Array<ReviewType>
   };
 
   constructor(props: ReviewsProps) {
@@ -56,15 +57,23 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
   }
 
   render() {
-    const { cards, cardContainerList } = this.props;
+    const { reviews, reviewTypes } = this.props;
     const { createPopupVisible } = this.state;
-    const content = cardContainerList.map((cardContainer) => (
+
+    const renderReviewCard = (review: Review): React.ReactElement => (
+      <ReviewCard key={review.id} review={review} />
+    );
+
+    const content = reviewTypes.map((reviewType) => (
       <CardContainer
-        key={cardContainer.code}
-        title={cardContainer.name}
-        cardList={cards.filter((e) => e.type === cardContainer.code)}
+        key={reviewType.code}
+        title={reviewType.name}
+        data={reviews.filter((review) => review.type === reviewType.code)}
+        renderFunction={renderReviewCard}
       />
     ));
+
+    console.log(reviews, reviewTypes);
 
     return (
       <div className="reviews">
@@ -89,8 +98,8 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
 
 function mapStateToProps(state: RootState) {
   return {
-    cards: state.reviews,
-    cardContainerList: state.reviewTypes
+    reviews: state.reviews,
+    reviewTypes: state.reviewTypes
   };
 }
 
