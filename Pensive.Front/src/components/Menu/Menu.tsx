@@ -18,10 +18,21 @@ function Menu(props: MenuProps): React.ReactElement {
           <h1 className="menu__header header">Pensive</h1>
         </Link>
 
-        <NavLink className="menu__item" to="Review">
+        <NavLink
+          className="menu__item"
+          activeClassName="menu__item_isactive"
+          isActive={(match, location) =>
+            match !== null || location.pathname === '/'
+          }
+          to="Review"
+        >
           Reviews
         </NavLink>
-        <NavLink className="menu__item" to="FamilyTree">
+        <NavLink
+          className="menu__item"
+          activeClassName="menu__item_isactive"
+          to="FamilyTree"
+        >
           Family Tree
         </NavLink>
       </div>
