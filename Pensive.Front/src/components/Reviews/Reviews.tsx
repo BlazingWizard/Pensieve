@@ -23,6 +23,7 @@ interface ReviewsProps {
 
 interface ReviewState {
   createPopupVisible: boolean;
+  selectedReview: Review | undefined;
 }
 
 class Reviews extends React.Component<ReviewsProps, ReviewState> {
@@ -34,7 +35,8 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
   constructor(props: ReviewsProps) {
     super(props);
     this.state = {
-      createPopupVisible: false
+      createPopupVisible: false,
+      selectedReview: undefined
     };
   }
 
@@ -44,9 +46,10 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
     getAllReviewTypes();
   }
 
-  handleCreatePopupClick() {
+  handleCreatePopupClick(review?: Review) {
     this.setState({
-      createPopupVisible: true
+      createPopupVisible: true,
+      selectedReview: review
     });
   }
 
@@ -58,10 +61,14 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
 
   render() {
     const { reviews, reviewTypes } = this.props;
-    const { createPopupVisible } = this.state;
+    const { selectedReview, createPopupVisible } = this.state;
 
     const renderReviewCard = (review: Review): React.ReactElement => (
-      <ReviewCard key={review.id} review={review} />
+      <ReviewCard
+        key={review.id}
+        review={review}
+        openForm={() => this.handleCreatePopupClick(review)}
+      />
     );
 
     const content = reviewTypes.map((reviewType) => (
@@ -89,7 +96,10 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
           isVisible={createPopupVisible}
           handleCloseClick={() => this.handleClosePopupClick()}
         >
-          <ReviewForm handleCloseClick={() => this.handleClosePopupClick()} />
+          <ReviewForm
+            handleCloseClick={() => this.handleClosePopupClick()}
+            selectedReview={selectedReview}
+          />
         </Popup>
       </div>
     );

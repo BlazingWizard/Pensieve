@@ -22,4 +22,17 @@ function addReviewAction(review: Review) {
   };
 }
 
-export { getAllReviewsAction, deleteReviewAction, addReviewAction };
+function updateReviewAction(review: Review) {
+  return async (dispatch: Dispatch): Promise<void> => {
+    await reviewApi.update(review);
+    dispatch(deleteReview(review.id));
+    dispatch(addReview(review));
+  };
+}
+
+export {
+  getAllReviewsAction,
+  deleteReviewAction,
+  addReviewAction,
+  updateReviewAction
+};

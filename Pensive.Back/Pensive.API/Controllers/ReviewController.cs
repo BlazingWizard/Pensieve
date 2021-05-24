@@ -36,7 +36,7 @@ namespace Pensive.API.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromForm] ReviewModel reviewModel)
+        public async Task<IActionResult> Update(int id, [FromBody] ReviewModel reviewModel)
         {
             if (id != reviewModel.Id)
             {

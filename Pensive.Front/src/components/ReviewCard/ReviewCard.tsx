@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -9,11 +11,12 @@ import { deleteReviewAction } from '../../store/reviews/asyncActions';
 
 interface ReviewCardProps {
   review: Review;
+  openForm: () => void;
 }
 
 const ReviewCard = (props: ReviewCardProps): React.ReactElement => {
-  // eslint-disable-next-line react/destructuring-assignment
-  const { id, title, posterUrl = '' } = props.review;
+  const { review, openForm } = props;
+  const { id, title, posterUrl = '' } = review;
 
   const dispatch = useDispatch();
   const handleDeleteClick = () => {
@@ -30,7 +33,7 @@ const ReviewCard = (props: ReviewCardProps): React.ReactElement => {
   );
 
   return (
-    <li className="review-card">
+    <li className="review-card" onClick={openForm}>
       {poster}
       <p className="review-card__title review-card__text text">{title}</p>
       <button

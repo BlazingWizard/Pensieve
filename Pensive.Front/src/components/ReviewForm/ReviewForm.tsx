@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { DispatchAsyncAction, RootState } from '../../store/types';
-import { addReviewAction } from '../../store/reviews/asyncActions';
+import {
+  addReviewAction,
+  updateReviewAction
+} from '../../store/reviews/asyncActions';
 
 import './ReviewForm.css';
 import Review from '../../models/Review';
@@ -12,7 +15,9 @@ type FormInputs = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
 type ReviewFormProps = typeof ReviewForm.defaultProps & {
   reviewTypes: Array<ReviewType>;
+  selectedReview?: Review;
   addReview: (review: Review) => void;
+  updateReview: (review: Review) => void;
   handleCloseClick: () => void;
 };
 
@@ -44,6 +49,11 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const { selectedReview } = this.props;
+    this.setState((state) => ({ ...state, ...selectedReview }));
+  }
+
   handleInputChange(event: React.ChangeEvent<FormInputs>) {
     const { id, value } = event.target;
 
@@ -55,13 +65,19 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
   handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
 
-    const { handleCloseClick, addReview } = this.props;
+    const { addReview, updateReview, handleCloseClick } = this.props;
 
     const review = {
       id: 0,
       ...this.state
     };
-    addReview(review);
+
+    if (review.id !== 0) {
+      updateReview(review);
+    } else {
+      addReview(review);
+    }
+
     handleCloseClick();
   }
 
@@ -135,6 +151,10 @@ function mapDispatchToProps(dispatch: DispatchAsyncAction) {
     addReview: (review: Review) => {
       const addReviewThunk = addReviewAction(review);
       dispatch(addReviewThunk);
+    },
+    updateReview: (review: Review) => {
+      const updateReviewThunk = updateReviewAction(review);
+      dispatch(updateReviewThunk);
     }
   };
 }
