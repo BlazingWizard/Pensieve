@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -33,9 +31,15 @@ const ReviewCard = (props: ReviewCardProps): React.ReactElement => {
   );
 
   return (
-    <li className="review-card" onClick={openForm}>
+    <li className="review-card">
       {poster}
-      <p className="review-card__title review-card__text text">{title}</p>
+      <button
+        type="button"
+        className="review-card__title review-card__text text"
+        onClick={openForm}
+      >
+        {title}
+      </button>
       <button
         type="button"
         className="review-card__delete-button text"

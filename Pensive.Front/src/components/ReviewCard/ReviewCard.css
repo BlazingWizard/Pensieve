@@ -59,6 +59,10 @@
   height: 100%;
   margin: 0px;
 
+  background: none;
+  border: none;
+
+  cursor: pointer;
   visibility: hidden;
 }
 
