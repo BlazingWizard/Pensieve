@@ -80,8 +80,6 @@ class Reviews extends React.Component<ReviewsProps, ReviewState> {
       />
     ));
 
-    console.log(reviews, reviewTypes);
-
     return (
       <div className="reviews">
         {content}
