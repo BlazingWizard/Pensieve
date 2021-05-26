@@ -11,6 +11,8 @@ namespace Pensive.Services.Mappings
             {
                 Id = review.Id,
                 Title = review.Title,
+                Text = review.Text,
+                Mark = review.Mark,
                 PosterUrl = review.PosterUrl,
                 Type = review.Type.Code
             };
@@ -22,6 +24,8 @@ namespace Pensive.Services.Mappings
             {
                 Id = reviewModel.Id,
                 Title = reviewModel.Title,
+                Text = reviewModel.Text,
+                Mark = reviewModel.Mark,
                 PosterUrl = reviewModel.PosterUrl,
                 Type = reviewType
             };

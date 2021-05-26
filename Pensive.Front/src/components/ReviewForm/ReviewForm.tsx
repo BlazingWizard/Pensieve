@@ -23,9 +23,9 @@ type ReviewFormProps = typeof ReviewForm.defaultProps & {
 
 interface ReviewFromState {
   type: string;
-  mark: string;
+  mark: number;
   title: string;
-  reviewText: string;
+  text: string;
 }
 
 class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
@@ -41,8 +41,8 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
       title: '',
       // FIX ME if reviewTypes is empty array, then an error will occur
       type: reviewTypes[0].code,
-      reviewText: '',
-      mark: '0'
+      text: '',
+      mark: 0
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -55,10 +55,15 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
   }
 
   handleInputChange(event: React.ChangeEvent<FormInputs>) {
-    const { id, value } = event.target;
+    const { id: fieldName, type: fieldType } = event.target;
+    let { value }: { value: number | string } = event.target;
+
+    if (fieldType === 'number') {
+      value = parseInt(value, 10);
+    }
 
     this.setState({
-      [id]: value
+      [fieldName]: value
     } as Pick<ReviewFromState, keyof ReviewFromState>);
   }
 
@@ -83,7 +88,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
 
   render() {
     const { reviewTypes } = this.props;
-    const { title, type, reviewText, mark } = this.state;
+    const { title, type, text, mark } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className="review-form">
         <label className="review-form__label" htmlFor="title">
@@ -111,13 +116,13 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
             </option>
           ))}
         </select>
-        <label className="review-form__label" htmlFor="reviewText">
+        <label className="review-form__label" htmlFor="text">
           Review text:
         </label>
         <textarea
           className="review-form__input review-form__text"
-          id="reviewText"
-          value={reviewText}
+          id="text"
+          value={text}
           onChange={this.handleInputChange}
         />
         <label className="review-form__label" htmlFor="mark">
