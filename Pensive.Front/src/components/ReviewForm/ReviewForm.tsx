@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { DispatchAsyncAction, RootState } from '../../store/types';
 import {
   addReviewAction,
+  deleteReviewAction,
   updateReviewAction
 } from '../../store/reviews/asyncActions';
 
@@ -18,6 +19,7 @@ type ReviewFormProps = typeof ReviewForm.defaultProps & {
   selectedReview?: Review;
   addReview: (review: Review) => void;
   updateReview: (review: Review) => void;
+  deleteReview: (id: number) => void;
   handleCloseClick: () => void;
 };
 
@@ -46,6 +48,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handelDeleteClick = this.handelDeleteClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -86,8 +89,18 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
     handleCloseClick();
   }
 
+  handelDeleteClick() {
+    const { selectedReview, deleteReview, handleCloseClick } = this.props;
+
+    if (selectedReview !== undefined) {
+      deleteReview(selectedReview.id);
+    }
+
+    handleCloseClick();
+  }
+
   render() {
-    const { reviewTypes } = this.props;
+    const { selectedReview, reviewTypes } = this.props;
     const { title, type, text, mark } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className="review-form">
@@ -137,9 +150,20 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFromState> {
           value={mark}
           onChange={this.handleInputChange}
         />
-        <button className="review-form__submit-button" type="submit">
-          Save
-        </button>
+        <div className="review-form_buttons-area">
+          <button className="review-form__button" type="submit">
+            Save
+          </button>
+          {selectedReview && (
+            <button
+              className="review-form__button"
+              type="button"
+              onClick={this.handelDeleteClick}
+            >
+              Delete
+            </button>
+          )}
+        </div>
       </form>
     );
   }
@@ -160,6 +184,10 @@ function mapDispatchToProps(dispatch: DispatchAsyncAction) {
     updateReview: (review: Review) => {
       const updateReviewThunk = updateReviewAction(review);
       dispatch(updateReviewThunk);
+    },
+    deleteReview: (id: number) => {
+      const deleteThunk = deleteReviewAction(id);
+      dispatch(deleteThunk);
     }
   };
 }

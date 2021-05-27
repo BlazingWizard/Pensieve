@@ -1,11 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import './ReviewCard.css';
 
 import Review from '../../models/Review';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
-import { deleteReviewAction } from '../../store/reviews/asyncActions';
 
 interface ReviewCardProps {
   review: Review;
@@ -14,13 +12,7 @@ interface ReviewCardProps {
 
 const ReviewCard = (props: ReviewCardProps): React.ReactElement => {
   const { review, openForm } = props;
-  const { id, title, posterUrl = '' } = review;
-
-  const dispatch = useDispatch();
-  const handleDeleteClick = () => {
-    const deleteThunk = deleteReviewAction(id);
-    dispatch(deleteThunk);
-  };
+  const { title, posterUrl = '' } = review;
 
   const poster = posterUrl ? (
     <img className="review-card__poster" alt="" src={posterUrl} />
@@ -39,13 +31,6 @@ const ReviewCard = (props: ReviewCardProps): React.ReactElement => {
         onClick={openForm}
       >
         {title}
-      </button>
-      <button
-        type="button"
-        className="review-card__delete-button text"
-        onClick={handleDeleteClick}
-      >
-        x
       </button>
     </li>
   );

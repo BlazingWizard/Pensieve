@@ -2,7 +2,7 @@
   height: 100%;
   display: grid;
 
-  grid-template-rows: 5% 5% auto 5% 5%;
+  grid-template-rows: 5% 5% auto 5% max-content;
   grid-template-columns: max-content auto;
   column-gap: 10px;
   row-gap: 10px;
@@ -26,12 +26,27 @@
   border-radius: 5px;
 }
 
-.review-form__submit-button {
+.review-form__button {
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
 
   border: none;
+  border-radius: 5px;
+  padding: 5px;
 
   color: #ffffff;
   background-color: #363636;
+
+  cursor: pointer;
+}
+
+.review-form_buttons-area {
+  grid-column: 2;
+
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+
+  border-top: 1px solid #363636;
+  padding-top: 10px;
 }
