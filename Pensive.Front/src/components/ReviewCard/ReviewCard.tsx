@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './ReviewCard.css';
-
 import Review from '../../models/Review';
 import getPlaceHolderText from '../../helpers/getPlaceHolderText';
 
@@ -17,7 +15,7 @@ const ReviewCard = (props: ReviewCardProps): React.ReactElement => {
   const poster = posterUrl ? (
     <img className="review-card__poster" alt="" src={posterUrl} />
   ) : (
-    <p className="review-card__poster review-card__placeholder review-card__text text">
+    <p className="review-card__poster review-card__placeholder review-card__text">
       {getPlaceHolderText(title)}
     </p>
   );

@@ -1,3 +1,5 @@
+@import '../styles/Mixin.scss';
+
 .review-card {
   min-width: 300px;
   min-height: 150px;
@@ -6,26 +8,20 @@
   border-radius: 15px;
   margin: 10px;
   position: relative;
-}
 
-.review-card .review-card__title {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
+  .review-card__title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
 
-.review-card .review-card__delete-button {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
+  &:hover .review-card__title {
+    visibility: visible;
+  }
 
-.review-card:hover .review-card__title {
-  visibility: visible;
-}
-
-.review-card:hover .review-card__poster {
-  filter: blur(3px);
+  &:hover .review-card__poster {
+    filter: blur(3px);
+  }
 }
 
 .review-card__delete-button {
@@ -67,6 +63,8 @@
 }
 
 .review-card__text {
+  @include text-big;
+
   font-weight: bold;
   text-align: center;
   -webkit-text-stroke-width: 1px;

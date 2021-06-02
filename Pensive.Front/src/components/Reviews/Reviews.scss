@@ -1,7 +1,9 @@
-.reviews .reviews__create-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+.reviews {
+  .reviews__create-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
 }
 
 .reviews__create-button {

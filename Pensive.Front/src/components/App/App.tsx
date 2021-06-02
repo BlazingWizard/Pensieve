@@ -2,10 +2,9 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import './App.scss';
-import Routes from '../../routes';
-import store from '../../store';
 import Menu from '../Menu';
+import store from '../../store';
+import Routes from '../../routes';
 
 function App(): React.ReactElement {
   return (

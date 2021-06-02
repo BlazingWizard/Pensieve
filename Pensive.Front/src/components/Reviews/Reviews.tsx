@@ -5,7 +5,6 @@ import { RootState, DispatchAsyncAction } from '../../store/types';
 import { getAllReviewsAction } from '../../store/reviews/asyncActions';
 import { getAllReviewTypesAction } from '../../store/reviewTypes/asyncActions';
 
-import './Reviews.css';
 import Popup from '../Popup';
 import ReviewCard from '../ReviewCard';
 import ReviewForm from '../ReviewForm';

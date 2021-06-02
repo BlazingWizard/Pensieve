@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import './Menu.css';
 import logo from './logo.svg';
 
 type MenuProps = {
@@ -15,7 +14,7 @@ function Menu(props: MenuProps): React.ReactElement {
       <div className="menu__nav">
         <Link className="menu__logo-block" to="/">
           <img className="menu__logo" src={logo} alt="logo" />
-          <h1 className="menu__header header">Pensive</h1>
+          <h1 className="menu__header">Pensive</h1>
         </Link>
 
         <NavLink

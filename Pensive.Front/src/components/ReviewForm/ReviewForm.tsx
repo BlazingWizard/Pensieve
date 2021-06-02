@@ -8,7 +8,6 @@ import {
   updateReviewAction
 } from '../../store/reviews/asyncActions';
 
-import './ReviewForm.css';
 import Review from '../../models/Review';
 import ReviewType from '../../models/ReviewType';
 

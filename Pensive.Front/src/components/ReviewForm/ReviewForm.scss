@@ -1,3 +1,5 @@
+@import '../styles/Mixin.scss';
+
 .review-form {
   height: 100%;
   display: grid;
@@ -9,17 +11,12 @@
 }
 
 .review-form__label {
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-
-  color: #ffffff;
+  @include text;
 }
 
 .review-form__input {
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
+  @include text;
 
-  color: #ffffff;
   background-color: #363636;
 
   border: 1px solid #000000;
@@ -27,14 +24,12 @@
 }
 
 .review-form__button {
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
+  @include text;
 
   border: none;
   border-radius: 5px;
   padding: 5px;
 
-  color: #ffffff;
   background-color: #363636;
 
   cursor: pointer;

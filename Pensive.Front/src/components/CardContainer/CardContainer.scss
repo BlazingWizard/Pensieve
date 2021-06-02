@@ -1,3 +1,5 @@
+@import '../styles/Mixin.scss';
+
 .card-container {
   border-bottom: 1px solid #363636;
   margin-bottom: 5px;
@@ -6,19 +8,20 @@
 
 .card-container__root {
   position: relative;
-}
 
-.card-container__root .card-container__backward-button {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  z-index: 1;
-}
-.card-container__root .card-container__forward-button {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  z-index: 1;
+  .card-container__backward-button {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+  }
+
+  .card-container__forward-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 1;
+  }
 }
 
 .card-container__nav-button {
@@ -33,12 +36,15 @@
 }
 
 .card-container__expand-button {
+  @include text;
+
   border: none;
   outline: none;
   background: none;
 }
 
 .card-container__header {
+  @include header;
   display: inline-block;
 }
 
@@ -46,20 +52,20 @@
   display: flex;
   list-style: none;
   overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border: 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #363636;
+  }
 }
 
 .card-container__cards_isexpand {
   flex-wrap: wrap;
-}
-
-.card-container__cards::-webkit-scrollbar {
-  height: 5px;
-}
-
-.card-container__cards::-webkit-scrollbar-track {
-  border: 0px;
-}
-
-.card-container__cards::-webkit-scrollbar-thumb {
-  background-color: #363636;
 }

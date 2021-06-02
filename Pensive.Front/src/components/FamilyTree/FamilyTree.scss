@@ -1,0 +1,5 @@
+@import '../styles/Mixin.scss';
+
+.family-tree__header {
+  @include header;
+}

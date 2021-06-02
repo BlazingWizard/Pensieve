@@ -5,19 +5,19 @@
   right: 0px;
   bottom: 0px;
   z-index: 999;
-  background-color: rgb(0, 0, 0, 0.75);
-}
+  background-color: rgba(0, 0, 0, 0.75);
 
-.popup__overlay .popup__content {
-  position: fixed;
-  top: 10%;
-  left: 20%;
-}
+  .popup__content {
+    position: fixed;
+    top: 10%;
+    left: 20%;
+  }
 
-.popup__overlay .popup__close-button {
-  position: absolute;
-  right: 0px;
-  top: 0px;
+  .popup__close-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
 }
 
 .popup__content {

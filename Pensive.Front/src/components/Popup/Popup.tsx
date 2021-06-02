@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './Popup.css';
-
 interface PopupProps {
   isVisible: boolean;
   children: React.ReactElement;

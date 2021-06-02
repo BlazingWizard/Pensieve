@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import './CardContainer.css';
-
 interface CardContainerProps<T> {
   title: string;
   data: Array<T>;
@@ -58,11 +56,11 @@ function CardContainer<T>(props: CardContainerProps<T>): React.ReactElement {
 
   return (
     <div className="card-container">
-      <h1 className="card-container__header header">{title}</h1>
+      <h1 className="card-container__header">{title}</h1>
       {(scrollIsVisible || isExpand) && (
         <button
           type="button"
-          className="card-container__expand-button text"
+          className="card-container__expand-button"
           onClick={handleToggleExpandClick}
         >
           {expandButtonText}

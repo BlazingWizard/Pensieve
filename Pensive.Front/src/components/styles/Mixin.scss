@@ -1,0 +1,18 @@
+@import './Color.scss';
+
+@mixin header {
+  color: $text-color;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 45px;
+}
+
+@mixin text {
+  color: $text-color;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+@mixin text-big {
+  @include text;
+  font-size: 40px;
+}
