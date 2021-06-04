@@ -19,7 +19,7 @@ function Menu(props: MenuProps): React.ReactElement {
 
         <NavLink
           className="menu__item"
-          activeClassName="menu__item_isactive"
+          activeClassName="menu__item_is-active"
           isActive={(match, location) =>
             match !== null || location.pathname === '/'
           }
@@ -29,7 +29,7 @@ function Menu(props: MenuProps): React.ReactElement {
         </NavLink>
         <NavLink
           className="menu__item"
-          activeClassName="menu__item_isactive"
+          activeClassName="menu__item_is-active"
           to="FamilyTree"
         >
           Family Tree

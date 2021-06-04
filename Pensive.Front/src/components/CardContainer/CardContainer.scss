@@ -1,8 +1,9 @@
+@import '../styles/Color.scss';
 @import '../styles/Mixin.scss';
 
 .card-container {
-  border-bottom: 1px solid #363636;
   margin-bottom: 5px;
+  border-bottom: 1px solid $border-primary;
   padding-left: 10px;
 }
 
@@ -25,22 +26,15 @@
 }
 
 .card-container__nav-button {
-  height: 100%;
-  background: none;
-  border: none;
-  outline: none;
+  @include button;
+  @include text-big;
 
-  cursor: pointer;
-  font-size: 50px;
-  color: white;
+  height: 100%;
 }
 
 .card-container__expand-button {
-  @include text;
-
-  border: none;
-  outline: none;
-  background: none;
+  @include button;
+  @include text-big;
 }
 
 .card-container__header {
@@ -49,21 +43,10 @@
 }
 
 .card-container__cards {
-  display: flex;
+  @include flex-row;
+  @include scroll;
+
   list-style: none;
-  overflow-x: scroll;
-
-  &::-webkit-scrollbar {
-    height: 5px;
-  }
-
-  &::-webkit-scrollbar-track {
-    border: 0px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #363636;
-  }
 }
 
 .card-container__cards_isexpand {

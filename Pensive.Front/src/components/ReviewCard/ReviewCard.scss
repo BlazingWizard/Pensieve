@@ -1,13 +1,14 @@
+@import '../styles/Color.scss';
 @import '../styles/Mixin.scss';
 
 .review-card {
+  position: relative;
+
   min-width: 300px;
   min-height: 150px;
-  width: 300px;
-  height: 150px;
-  border-radius: 15px;
+
   margin: 10px;
-  position: relative;
+  border-radius: 15px;
 
   .review-card__title {
     position: absolute;
@@ -25,10 +26,7 @@
 }
 
 .review-card__delete-button {
-  outline: none;
-  background: none;
-  border: none;
-  cursor: pointer;
+  @include button;
 }
 
 .review-card__poster {
@@ -38,27 +36,20 @@
 }
 
 .review-card__placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
 
   margin: 0px;
-  background-color: #363636;
+  background-color: $background-light;
 }
 
 .review-card__title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include button;
+  @include flex-center;
 
   width: 100%;
   height: 100%;
   margin: 0px;
 
-  background: none;
-  border: none;
-
-  cursor: pointer;
   visibility: hidden;
 }
 
@@ -67,6 +58,4 @@
 
   font-weight: bold;
   text-align: center;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #000000;
 }

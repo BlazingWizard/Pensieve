@@ -25,7 +25,7 @@ const ReviewCard = (props: ReviewCardProps): React.ReactElement => {
       {poster}
       <button
         type="button"
-        className="review-card__title review-card__text text"
+        className="review-card__title review-card__text"
         onClick={openForm}
       >
         {title}

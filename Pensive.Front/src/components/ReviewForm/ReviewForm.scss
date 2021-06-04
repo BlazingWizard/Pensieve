@@ -2,11 +2,13 @@
 
 .review-form {
   height: 100%;
+
   display: grid;
 
-  grid-template-rows: 5% 5% auto 5% max-content;
   grid-template-columns: max-content auto;
   column-gap: 10px;
+
+  grid-template-rows: 5% 5% auto 5% max-content;
   row-gap: 10px;
 }
 
@@ -17,31 +19,27 @@
 .review-form__input {
   @include text;
 
-  background-color: #363636;
-
-  border: 1px solid #000000;
+  border: 1px solid $border-dark;
   border-radius: 5px;
+
+  background-color: $border-primary;
 }
 
 .review-form__button {
   @include text;
+  @include button;
 
   border: none;
   border-radius: 5px;
   padding: 5px;
 
-  background-color: #363636;
-
-  cursor: pointer;
+  background-color: $border-primary;
 }
 
 .review-form_buttons-area {
+  @include flex-row(20px);
+
   grid-column: 2;
-
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-
-  border-top: 1px solid #363636;
+  border-top: 1px solid $border-primary;
   padding-top: 10px;
 }
