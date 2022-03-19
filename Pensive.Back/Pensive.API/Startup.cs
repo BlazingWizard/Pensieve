@@ -39,7 +39,7 @@ namespace Pensive.API
             
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
             
             services.AddScoped<IReviewRepository, ReviewRepository>();
@@ -61,6 +61,18 @@ namespace Pensive.API
             app.UseRouting();
             app.UseCors();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            MigrateDb(app);           
+        }
+        
+        private void MigrateDb(IApplicationBuilder app)
+        { 
+            // TODO fix exception on start
+            using var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope();
+            using var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            context.Database.Migrate();
         }
     }
 }

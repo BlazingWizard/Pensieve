@@ -128,7 +128,6 @@ FakesAssemblies/
 # Local History for Visual Studio
 .localhistory/
 
-Migrations/
 *.db
 *.db-shm
 *.db-wal
