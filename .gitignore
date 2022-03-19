@@ -130,6 +130,8 @@ FakesAssemblies/
 
 Migrations/
 *.db
+*.db-shm
+*.db-wal
 
 react-app-env.d.ts
 

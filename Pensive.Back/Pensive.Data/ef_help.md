@@ -1,8 +1,8 @@
-# Start work with `dotnet ef` on linux
+# Start work with `dotnet ef` on Mac OS
 
 ```bash
-export PATH="$PATH:$HOME/.dotnet/tools/"
-export DOTNET_ROOT=/snap/dotnet-runtime-31/current
+export PATH="$PATH:/Users/lobanov_vv/.dotnet/tools"
+export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 ```
 
