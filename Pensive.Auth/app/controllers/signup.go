@@ -32,6 +32,10 @@ type SignupResponce struct {
 func (s *Signup) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
+		user := s.userService.Get()
+
+		j, _ := json.Marshal(user)
+		w.Write(j)
 	case http.MethodPost:
 		// TODO error handling
 		user, _ := s.userService.Create()
