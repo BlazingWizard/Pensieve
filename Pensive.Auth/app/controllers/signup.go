@@ -30,20 +30,21 @@ type SignupResponce struct {
 }
 
 func (s *Signup) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
+	switch r.Method {
+	case http.MethodGet:
+	case http.MethodPost:
+		// TODO error handling
+		user, _ := s.userService.Create()
+		resp := SignupResponce{user, ""}
+
+		j, err := json.Marshal(resp)
+		if err != nil {
+			http.Error(w, "", http.StatusInternalServerError)
+			return
+		}
+
+		w.Write(j)
+	default:
 		http.Error(w, "", http.StatusMethodNotAllowed)
-		return
 	}
-
-	// TODO error handling
-	user, _ := s.userService.Create()
-	resp := SignupResponce{user, ""}
-
-	j, err := json.Marshal(resp)
-	if err != nil {
-		http.Error(w, "", http.StatusInternalServerError)
-		return
-	}
-
-	w.Write(j)
 }
