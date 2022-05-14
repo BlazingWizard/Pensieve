@@ -2,18 +2,38 @@ version: "3.9"
 services:
   frontend:
     build: ./Pensive.Front
+    container_name: frontend
     ports:
       - "3000:3000"
   backend:
     build: ./Pensive.Back
+    container_name: backend
     ports:
       - "5001:80"
     depends_on:
       - database
-  database:
+  backend-db:
     image: postgres:14-alpine
     restart: always
+    container_name: backend-db
     environment:
       POSTGRES_DB: pensive
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin12345
+  auth-db:
+    image: mongo:4.4.14
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@auth-db:27017/

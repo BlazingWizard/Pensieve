@@ -4,16 +4,23 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"BlazingWizard/Pensive.Auth/app/data"
 	"BlazingWizard/Pensive.Auth/app/services"
+
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Signup struct {
 	userService *services.UserService
 }
 
-func NewSignup() *Signup {
+func NewSignup(db *mongo.Database) *Signup {
 	return &Signup{
-		userService: &services.UserService{},
+		userService: &services.UserService{
+			Repository: &data.UserRepository{
+				Db: db,
+			},
+		},
 	}
 }
 
