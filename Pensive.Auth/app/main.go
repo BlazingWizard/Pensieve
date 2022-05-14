@@ -5,14 +5,15 @@ import (
 	"net/http"
 
 	"BlazingWizard/Pensive.Auth/app/middleware"
+	"BlazingWizard/Pensive.Auth/app/pkg"
 	"BlazingWizard/Pensive.Auth/app/services"
 )
 
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet {
+	mux.HandleFunc("/signup", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
 			http.Error(w, "", http.StatusMethodNotAllowed)
 			return
 		}
@@ -21,7 +22,7 @@ func main() {
 	})
 
 	http.ListenAndServe(":8090",
-		middleware.Apply(
+		pkg.ApplyMiddleware(
 			mux,
 			middleware.SayHello,
 			middleware.Logger,
